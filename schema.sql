@@ -20,11 +20,9 @@ CREATE TABLE items (
     quantity INTEGER,
     unit VARCHAR(50),
     user_id INTEGER,
-    offer_id INTEGER,
     created_at TIMESTAMP,
     updated_at TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE RESTRICT,
-    FOREIGN KEY (offer_id) REFERENCES offers (id) ON DELETE RESTRICT
+    FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE RESTRICT
 );
 
 CREATE TABLE photos (
