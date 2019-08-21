@@ -1,0 +1,29 @@
+<main>
+  <h2>Edit details</h2>
+
+  <% @error_messages.each do |message| %>
+    <p><%= message %></p>
+  <% end %>
+
+  <p><%= @success_message %></p>
+
+  <form action="/users/<%= current_user.id %>" method="post">
+    <input type="hidden" name="_method" value="put">
+    <input type="email" placeholder="Email*" name="email" value="<%= current_user.email %>">
+    <input type="text" placeholder="Username*" name="username" value="<%= current_user.username %>">
+    <input type="text" placeholder="Address Line 1" name="address_line_1" value="<%= current_user.address_line_1 %>">
+    <input type="text" placeholder="Suburb" name="suburb" value="<%= current_user.suburb %>">
+    <input type="text" placeholder="Postcode*" name="postcode" value="<%= current_user.postcode %>">
+    <input type="text" placeholder="Availability" name="availability" value="<%= current_user.availability %>">
+    <label>Confirm password to apply changes</label>
+    <input type="password" placeholder="Current password" name="password">
+    <button>Update</button>
+  </form>
+
+  <a href="/users/<%= current_user.id %>/edit_password">Change password</a>
+  
+  <form action="/sessions" method="post">
+    <input type="hidden" name="_method" value="delete">
+    <button>Logout</button>
+  </form>
+</main>
