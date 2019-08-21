@@ -1,0 +1,16 @@
+<main>
+  <h2>Please sign in</h2>
+
+  <p><%= @message %></p>
+
+  <form action="/sessions" method="post">
+    <input type="email" placeholder="Email" name="email">
+    <input type="password" placeholder="Password" name="password">
+    <button>Sign in</button>
+  </form>
+  
+  <section>
+    <p>Not a member yet?</p>
+    <a href="/users/new">Create an account</a>
+  </section>
+</main>

@@ -1,0 +1,18 @@
+<main>
+  <h2>Enter your details</h2>
+
+  <% @error_messages.each do |message| %>
+    <p><%= message %></p>
+  <% end %>
+  
+  <form action="/users" method="post">
+    <input type="email" placeholder="Email*" name="email">
+    <input type="text" placeholder="Username*" name="username">
+    <input type="password" placeholder="Password*" name="password">
+    <input type="text" placeholder="Address Line 1" name="address_line_1">
+    <input type="text" placeholder="Suburb" name="suburb">
+    <input type="text" placeholder="Postcode*" name="postcode">
+    <input type="text" placeholder="Availability" name="availability">
+    <button>Create account</button>
+  </form>
+</main>
