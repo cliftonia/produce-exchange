@@ -17,6 +17,7 @@ CREATE TABLE users (
 CREATE TABLE items (
     id SERIAL PRIMARY KEY,
     title VARCHAR(300),
+    description TEXT,
     quantity INTEGER,
     unit VARCHAR(50),
     user_id INTEGER,
@@ -36,7 +37,7 @@ CREATE TABLE photos (
 
 CREATE TABLE offer_statuses (
     id SERIAL PRIMARY KEY,
-    type VARCHAR(100),
+    stage VARCHAR(100),
     created_at TIMESTAMP,
     updated_at TIMESTAMP
 );
