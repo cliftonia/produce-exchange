@@ -1,5 +1,9 @@
 require 'pry'
 require_relative 'database_config'
-also_reload File.expand_path(__dir__, 'models/*')
+require_relative 'models/item'
+require_relative 'models/offer_status'
+require_relative 'models/offer'
+require_relative 'models/photo'
+require_relative 'models/user'
 
 binding.pry
