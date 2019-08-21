@@ -1,0 +1,2 @@
+get '/offers' do
+end

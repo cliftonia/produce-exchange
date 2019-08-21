@@ -1,0 +1,2 @@
+get '/items' do
+end

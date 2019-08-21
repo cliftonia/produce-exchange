@@ -1,0 +1,2 @@
+get '/users' do
+end
