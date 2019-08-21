@@ -1,3 +1,9 @@
+require_relative 'database_config'
+require_relative 'models/item'
+require_relative 'models/offer_status'
+require_relative 'models/offer'
+require_relative 'models/photo'
+require_relative 'models/user'
 
 users = ['pam', 'clifton', 'ashley', 'jake', 'rachel']
 
@@ -8,7 +14,7 @@ users.each do |user|
   u.password = 'abcd'
   u.postcode = rand(3000..3050)
   u.avatar = 'https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png'
-  u.availbilty = "mon, tues evenings, and weekends"
+  u.availability = "mon, tues evenings, and weekends"
   u.save
 end
 
@@ -16,7 +22,7 @@ statuses = ['pending', 'declined', 'accepted', 'completed']
 
 statuses.each do |status|
   s = OfferStatus.new
-  s.status = statuses
+  s.type = status
   s.save
 end
 
