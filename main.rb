@@ -1,5 +1,9 @@
 require 'pry'    
 require 'sinatra'
+require 'sinatra/flash'
+require 'carrierwave'
+require 'carrierwave/orm/activerecord'
+require 'fog/aws'
 
 __FILE__
 require 'sinatra/reloader' if development?
