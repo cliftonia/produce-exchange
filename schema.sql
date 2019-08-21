@@ -34,6 +34,13 @@ CREATE TABLE photos (
     FOREIGN KEY (item_id) REFERENCES items (id) ON DELETE RESTRICT
 );
 
+CREATE TABLE offer_statuses (
+    id SERIAL PRIMARY KEY,
+    type VARCHAR(100),
+    created_at TIMESTAMP,
+    updated_at TIMESTAMP
+);
+
 CREATE TABLE offers (
     id SERIAL PRIMARY KEY,
     proposer_user_id INTEGER,
@@ -50,11 +57,4 @@ CREATE TABLE offers (
     FOREIGN KEY (proposer_item_id) REFERENCES items (id) ON DELETE RESTRICT,
     FOREIGN KEY (reviewer_item_id) REFERENCES items (id) ON DELETE RESTRICT,
     FOREIGN KEY (status_id) REFERENCES offer_statuses (id) ON DELETE RESTRICT
-);
-
-CREATE TABLE offer_statuses (
-    id SERIAL PRIMARY KEY,
-    type VARCHAR(100),
-    created_at TIMESTAMP,
-    updated_at TIMESTAMP
 );
