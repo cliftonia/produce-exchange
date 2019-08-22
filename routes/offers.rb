@@ -33,3 +33,32 @@ post '/offers/new' do
   # redirect to a transactions page
 end
 
+get '/offer/:id' do
+  @offer = Offer.find(params[:id])
+  @status = OfferStatus.find(@offer.status_id).stage
+  proposed_user_id = @offer.proposer_item.user_id
+  @photos = Photo.where(item_id: @offer.proposer_item.id)
+  # binding.pry
+
+  # here will be the details of the offer with accept or decline
+  # change the status depending on the action
+  erb :offer_confirm
+  # "hey"
+end
+
+post '/api/offer_status' do
+  content_type :json
+  offer = Offer.find(params[:offer_id])
+  offer_status = OfferStatus.find(offer.status_id).stage
+  if params[:class_name].include? 'accept'
+    offer.status_id = 3
+  elsif params[:class_name].include? 'decline'
+    offer.status_id = 2
+  end
+  if offer.save
+    { message: 'Record saved!',
+      offer_status: offer_status
+    }.to_json
+  end
+
+end
