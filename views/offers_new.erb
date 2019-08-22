@@ -6,29 +6,33 @@
   <img src="<%=photo.image_link%>" alt="">
 <% end %>
 
-
 <% @proposed_items.each do |item| %>
   <p><%=item.quantity%> <%=item.unit%> <%=item.title%></p>
 <% end %>
 
-
 <form action="/offers/new" method="post">
   <label for="">your items</label>
-  <select name="item_id" id="">
     <% @proposed_items.each do |item| %>
-      <option name="item_id" value="<%=item.id%>"><%=item.title%></option>
+      <select name="item_id" id="">
+          <option name="item_id" value="<%=item.id%>"><%=item.title%></option>
+      </select>
+      <input type="number" name="qty" placeholder="quantity" min=1 max="<%=item.quantity%>">
+      <select name="unit" id="">
+        <option value="kg"><%=item.unit%></option>
+      </select>
     <% end %>
-  </select>
-  <label for="">quantity</label>
-  <input type="text" name="qty">
   <label for="">unit</label>
-  <select name="unit" id="">
-    <option value="kg">kg</option>
-    <option value="g">g</option>
-    <option value="ltrs">ltrs</option>
-    <option value="ml">ml</option>
-    <option value="pcs">pcs</option>
+  <label for="meeting_point">Meeting point</label>
+  <select name="meeting_point" id="">
+    <option value="yours">your location</option>
+    <option value="theirs">their location</option>
+    <option value="elsewhere">elsewhere</option>
   </select>
+    <input type="text" name="elsewhere" placeholder="Suggest elsewhere">
   <input type="hidden" name="reviewer_item_id" value="<%=@reviewer_item.id%>">
   <button>make offer</button>
+</form>
+
+<form action="items/new">
+  <button>Add item</button>
 </form>
