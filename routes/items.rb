@@ -17,7 +17,7 @@ post '/items' do
   photo.item_id = item.id
   photo.save
 
-  redirect '/'
+  redirect "/items/#{item.id}"
 end
 
 get '/items/:id' do 
