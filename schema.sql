@@ -50,6 +50,7 @@ CREATE TABLE offers (
     reviewer_user_id INTEGER,
     reviewer_item_id INTEGER,
     reviewer_item_qty INTEGER,
+    meeting_point VARCHAR(200),
     status_id INTEGER,
     created_at TIMESTAMP,
     updated_at TIMESTAMP,
