@@ -15,10 +15,12 @@
 
 <section class="reviewer-offers">
   <% @reviewer_offers.each do |offer| %>
-    <div class="offer-card">
-      <p><%=offer.reviewer_item.title%> <%=offer.reviewer_item.quantity%><%=offer.reviewer_item.unit%></p>
-      <img src="<%=Photo.where(item_id: offer.reviewer_item.id).first.image_link%>" alt="">
-    </div>
+    <a href="/offer/<%=offer.id%>">
+      <div class="offer-card">
+        <p><%=offer.reviewer_item.title%> <%=offer.reviewer_item.quantity%><%=offer.reviewer_item.unit%></p>
+        <img src="<%=Photo.where(item_id: offer.reviewer_item.id).first.image_link%>" alt="">
+      </div>
+    </a>
   <% end %>
 </section>
 

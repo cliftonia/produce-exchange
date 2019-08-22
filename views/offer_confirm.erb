@@ -1,0 +1,56 @@
+<h1>offer confirm</h1>
+
+<h2 class="offer-status"><%=@status%></h2>
+<section class="proposer-item">
+  <h2>Your item</h2>
+  <%=@offer.proposer_item.title%>
+  <%=@offer.proposer_item.quantity%><%=@offer.proposer_item.unit%>
+  <%=@offer.proposer_item.user.username%>
+</section>
+
+<section class="review-item">
+  <h2>Their Item</h2>
+  <%=@offer.reviewer_item.title%>
+  <%=@offer.reviewer_item.quantity%><%=@offer.reviewer_item.unit%>
+  <%=@offer.reviewer_item.user.username%>
+</section>
+
+<div class="offer-options">
+  <form action="">
+    <button data-offer-id="<%=@offer.id%>" class="accept offer">ACCEPT</button>
+  </form>
+  <form action="">
+    <button data-offer-id="<%=@offer.id%>" class="decline offer">DECLINE</button>
+  </form>
+</div>
+<h2 class="offer-alert"></h2>
+
+<script src="https://code.jquery.com/jquery-3.4.1.js"
+  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+  crossorigin="anonymous">
+</script>
+<script>
+var offerOptions = document.querySelector('.offer-options')
+var offerAlert = document.querySelector('.offer-alert')
+var offerStatus = document.querySelector('.offer-status')
+
+var chooseOfferOption = function (event){
+  event.preventDefault()
+  var options = {
+    method: 'post',
+    url: '/api/offer_status',
+    data: { offer_id: event.target.getAttribute('data-offer-id'),
+    class_name: event.target.className }
+  }
+
+  var updateOfferStatus = function(resp) {
+    offerAlert.textContent = resp.message
+    offerStatus.textContent = resp.offer_status
+  }
+
+  $.ajax(options).done(updateOfferStatus)
+}
+
+offerOptions.addEventListener('click', chooseOfferOption)
+
+</script>
