@@ -16,9 +16,6 @@ users.each do |user|
   u.username = user
   u.email = "#{user}@email.com"
   u.password = 'abcd'
-  u.description = 'I love gummi bears chocolate bar sugar plum. \
-  Pudding danish candy danish sweet roll. Fruitcake biscuit candy. \
-  Tootsie roll chocolate bear claw muffin.'
   u.postcode = rand(3000..3050)
   u.avatar = 'https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png'
   u.availability = "mon, tues evenings, and weekends"
@@ -39,6 +36,9 @@ units = ['kg', 'g', 'pcs']
 items.each_with_index do |item, index|
   i = Item.new
   i.title = item
+  i.description = 'I love gummi bears chocolate bar sugar plum. \
+  Pudding danish candy danish sweet roll. Fruitcake biscuit candy. \
+  Tootsie roll chocolate bear claw muffin.'
   i.quantity = rand(1..10)
   i.unit = units.sample
   i.user_id = index + 1
