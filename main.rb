@@ -32,7 +32,7 @@ end
 
 before do
   if !logged_in?
-    if request.path != '/' && request.path != '/sessions/new' && request.path != '/sessions'
+    if request.path != '/' && request.path != '/sessions/new' && request.path != '/sessions' && request.path != '/users/new' && request.path != '/users'
       redirect '/sessions/new' 
     end
   end
