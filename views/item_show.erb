@@ -1,0 +1,39 @@
+<div class="show-img">
+
+  <% @photos.each do |photo| %>
+
+  <img class="show-img" src="<%= photo.image_link %>" alt="">
+
+  <% end %>
+
+</div>
+
+<h1> <%= @item.title %> </h1>
+
+<h2>Description</h2>
+<p> <%= @item.description %> </p>
+
+<h2>Quantity</h2>
+<p> <%= @item.quantity%> <%= @item.unit%> </p>
+
+<% if logged_in? && current_user.id == @item.user_id%>
+  
+  <form action="/items/<%= @item.id %>" method="post">
+    <input type="hidden" name="_method" value="delete">
+    <button>delete</button>
+  </form>
+
+  <a href="/items/<%= @item.id %>/edit">edit picture</a>
+
+<% end %>
+
+<% if logged_in? && current_user.id != @item.user_id %>
+
+  <form action="/offers/<%= @item.id%>">
+    <button>make offer</button>
+  </form>
+
+<% end %>
+
+
+  

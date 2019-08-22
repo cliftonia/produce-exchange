@@ -20,6 +20,15 @@ post '/items' do
   redirect '/'
 end
 
+get '/items/:id' do 
+
+  @item = Item.find(params[:id])
+
+  @photos = @item.photos
+
+  erb :item_show
+end
+
 get '/items/:id/edit' do 
   @item = Item.find(params[:id])
   @photo = Photo.find_by(item_id: params[:id])
@@ -40,4 +49,14 @@ put '/items/:id' do
   photo.save
 
   redirect '/'
+end
+
+delete '/items/:id' do
+  @item = Item.find(params[:id])
+
+  @photo = Photo.find_by(item_id: params[:id])
+  @photo.delete
+
+  @item.delete
+  redirect "/"
 end
