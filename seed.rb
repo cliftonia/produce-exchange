@@ -61,5 +61,6 @@ end
   o.reviewer_item_id = index +2
   o.reviewer_item_qty = rand(1..Item.find(o.reviewer_item_id).quantity)
   o.status_id = rand(1..3)
+  o.meeting_point = "1 Main Road, Melbourne"
   o.save
 end

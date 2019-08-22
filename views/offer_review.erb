@@ -1,0 +1,19 @@
+
+<section class="proposer-offers">
+  <% @proposer_offers.each do |offer| %>
+    <div class="offer-card">
+      <p><%=offer.proposer_item.title%> <%=offer.proposer_item.quantity%> <%=offer.proposer_item.unit%></p>
+      <img src="<%=Photo.where(item_id: offer.proposer_item.id).first.image_link%>" alt="">
+    </div>
+  <% end %>
+</section>
+
+<section class="reviewer-offers">
+  <% @reviewer_offers.each do |offer| %>
+    <div class="offer-card">
+      <p><%=offer.reviewer_item.title%> <%=offer.reviewer_item.quantity%><%=offer.reviewer_item.unit%></p>
+      <img src="<%=Photo.where(item_id: offer.reviewer_item.id).first.image_link%>" alt="">
+    </div>
+  <% end %>
+</section>
+
