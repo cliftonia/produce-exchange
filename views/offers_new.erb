@@ -6,11 +6,9 @@
   <img src="<%=photo.image_link%>" alt="">
 <% end %>
 
-
 <% @proposed_items.each do |item| %>
   <p><%=item.quantity%> <%=item.unit%> <%=item.title%></p>
 <% end %>
-
 
 <form action="/offers/new" method="post">
   <label for="">your items</label>
@@ -33,4 +31,8 @@
     <input type="text" name="elsewhere" placeholder="Suggest elsewhere">
   <input type="hidden" name="reviewer_item_id" value="<%=@reviewer_item.id%>">
   <button>make offer</button>
+</form>
+
+<form action="items/new">
+  <button>Add item</button>
 </form>
