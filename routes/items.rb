@@ -45,10 +45,12 @@ put '/items/:id' do
   item.save
 
   photo = Photo.find_by(item_id: params[:id])
+
   photo.image_link = params[:image_link]
+
   photo.save
 
-  redirect '/'
+  redirect "/items/#{item.id}"
 end
 
 delete '/items/:id' do

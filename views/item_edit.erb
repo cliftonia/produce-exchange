@@ -3,7 +3,7 @@
 <div class="i-uploader">
   <form action="/items/<%= @item.id %>" method="post" enctype="multipart/form-data">
   <input type="hidden" name="_method" value="put">
-    <input class="choose-file" type="file" name="image_link" />
+    <input class="choose-file" type="file" name="image_link" value="<%= @photo.image_link.identifier %>" />
     <div class="new-title">
       <label for="">Title?</label>
       <input class="title-input" type="text" name="title" value="<%= @item.title%>">
