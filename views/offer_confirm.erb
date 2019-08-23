@@ -1,17 +1,29 @@
 <h1>offer confirm</h1>
 
 <h2 class="offer-status"></h2>
+
+
+<%# if the current_user is the proposer then it is THEIR item %>
+
 <section class="proposer-item">
+<% if @offer.proposer_item.user.id === current_user.id%>
   <h2>Your item</h2>
+<% else %>
+  <h2>Their item</h2>
+<% end %>
   <%=@offer.proposer_item.title%>
-  <%=@offer.proposer_item.quantity%><%=@offer.proposer_item.unit%>
+  <%=@offer.proposer_item_qty%><%=@offer.proposer_item.unit%>
   <%=@offer.proposer_item.user.username%>
 </section>
 
 <section class="review-item">
-  <h2>Their Item</h2>
+<% if @offer.reviewer_item.user.id === current_user.id%>
+  <h2>Your item</h2>
+<% else %>
+  <h2>Their item</h2>
+<% end %>
   <%=@offer.reviewer_item.title%>
-  <%=@offer.reviewer_item.quantity%><%=@offer.reviewer_item.unit%>
+  <%=@offer.reviewer_item_qty%><%=@offer.reviewer_item.unit%>
   <%=@offer.reviewer_item.user.username%>
 </section>
 <section class="meeting-point">
