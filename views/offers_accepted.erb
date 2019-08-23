@@ -1,0 +1,5 @@
+<% @offers.each do |offer| %>
+  <p>Proposer: <%= offer.proposer_item.user.username %></p>
+  <p>Reviewer: <%= offer.reviewer_item.user.username %></p>
+  <p>Status: <%= offer.status.stage %></p>
+<% end %>
