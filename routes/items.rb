@@ -48,11 +48,11 @@ put '/items/:id' do
   item.longitude = current_user.lon
   item.save
 
-  photo = Photo.find_by(item_id: params[:id])
+  # photo = Photo.find_by(item_id: params[:id])
 
-  photo.image_link = params[:image_link]
+  # photo.image_link = params[:image_link]
 
-  photo.save
+  # photo.save
 
   redirect "/items/#{item.id}"
 end
