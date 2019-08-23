@@ -72,8 +72,14 @@ post '/api/offer_status' do
   content_type :json
   offer = Offer.find(params[:offer_id])
   offer_status = OfferStatus.find(offer.status_id)
+  prop_item = Item.find(offer.proposer_item_id)
+  rev_item = Item.find(offer.reviewer_item_id)
   if params[:class_name].include? 'accept'
     offer.status_id = 3
+    prop_item_qty = offer.proposer_item.quantity - offer.proposer_item_qty
+    rev_item_qty = offer.reviewer_item.quantity - offer.reviewer_item_qty
+    prop_item.save
+    rev_item.save
   elsif params[:class_name].include? 'decline'
     offer.status_id = 2
   end
@@ -82,5 +88,4 @@ post '/api/offer_status' do
       offer_status: OfferStatus.find(offer.status_id).stage,
     }.to_json
   end
-
 end

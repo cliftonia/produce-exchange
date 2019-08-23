@@ -2,9 +2,6 @@
 
 <h2 class="offer-status"></h2>
 
-
-<%# if the current_user is the proposer then it is THEIR item %>
-
 <section class="proposer-item">
 <% if @offer.proposer_item.user.id === current_user.id%>
   <h2>Your item</h2>
