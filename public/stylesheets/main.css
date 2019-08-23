@@ -1,3 +1,17 @@
+:root {
+  --text: #666666;
+  
+  --main: #f68787;
+  --secondary: #ffba92;
+  --tertiary: #e0f5b9;
+  --quarternary: #c6f1d6;
+
+  --main-hover: #ff8080;
+  --secondary-hover: #f8a978;
+  --tertiary-hover: #f1eb9a;
+  --quarternary-hover: #a4f6a5;
+}
+
 img {
   width: 300px;
 }

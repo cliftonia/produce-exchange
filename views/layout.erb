@@ -4,36 +4,37 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Hello World</title>
-  <link rel='stylesheet' href='/stylesheets/reset.css'>
-  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="/stylesheets/normalize.css">
+  <link rel="stylesheet" href="/stylesheets/skeleton.css">
   <link rel='stylesheet' href='/stylesheets/main.css'>
 </head>
 <body>
+  <div class="container">
+    <% if logged_in? %>
+      <p>logged in as: <%= current_user.email %></p>
+      <form action="/sessions" method="post">
+        <input type="hidden" name="_method" value="delete">
+        <button>Logout</button>
+      </form>
+    <% else %>
+      <a href="/sessions/new">Login</a>
+    <% end %>
 
-  <% if logged_in? %>
-    <p>logged in as: <%= current_user.email %></p>
-    <form action="/sessions" method="post">
-      <input type="hidden" name="_method" value="delete">
-      <button>Logout</button>
-    </form>
-  <% else %>
-    <a href="/sessions/new">Login</a>
-  <% end %>
+    <%= yield %>
 
-  <%= yield %>
-
-  <footer>
-    <nav>
-      <a href="/items/new">Add new item</a>
-      <a href="/offers">Offers</a>
-      <a href="/users/:id">Account</a>
-      <a href="/">Home</a>
-    </nav>
-  </footer>
-  <script
-  src="https://code.jquery.com/jquery-3.4.1.js"
-  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-  crossorigin="anonymous"></script>
+    <footer>
+      <nav>
+        <a href="/items/new">Add new item</a>
+        <a href="/offers">Offers</a>
+        <a href="/users/:id">Account</a>
+        <a href="/">Home</a>
+      </nav>
+    </footer>
+    <script
+    src="https://code.jquery.com/jquery-3.4.1.js"
+    integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+    crossorigin="anonymous"></script>
+  </div>
   <script src="/javascripts/application.js"></script>
 </body>
 </html>
