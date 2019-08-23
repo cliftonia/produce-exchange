@@ -194,6 +194,7 @@ GEM
       fog-core
       nokogiri (>= 1.5.11, < 2.0.0)
     formatador (0.2.5)
+    geocoder (1.5.1)
     google-api-client (0.23.9)
       addressable (~> 2.5, >= 2.5.1)
       googleauth (>= 0.5, < 0.7.0)
@@ -211,6 +212,9 @@ GEM
       signet (~> 0.7)
     http-cookie (1.0.3)
       domain_name (~> 0.5)
+    httparty (0.17.0)
+      mime-types (~> 3.0)
+      multi_xml (>= 0.5.2)
     httpclient (2.8.3)
     i18n (1.6.0)
       concurrent-ruby (~> 1.0)
@@ -231,6 +235,7 @@ GEM
     mini_portile2 (2.4.0)
     minitest (5.11.3)
     multi_json (1.13.1)
+    multi_xml (0.6.0)
     multipart-post (2.1.1)
     mustermann (1.0.3)
     netrc (0.11.0)
@@ -300,6 +305,8 @@ DEPENDENCIES
   fog
   fog-aws
   fog-core (= 2.1.0)
+  geocoder
+  httparty
   pg
   pry
   sinatra

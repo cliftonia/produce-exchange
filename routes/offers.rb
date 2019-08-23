@@ -1,3 +1,8 @@
+get '/offers/accepted' do
+  @offers = Offer.all
+  erb :offers_accepted
+end
+
 get '/offers' do
   @offers = Offer.all
   @proposer_offers = Offer.where(proposer_user_id: current_user.id)
