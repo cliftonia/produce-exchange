@@ -1,6 +1,8 @@
 <main>
   <section class=filters>
-    <button class="my-items-btn">My Items</button>
+    <% if logged_in? %>
+      <button class="my-items-btn">My Items</button>
+    <% end %>
   </section>
 
   <section class="items">
@@ -16,6 +18,8 @@
 <script>
   const myItemsBtn = document.querySelector('.my-items-btn')
   const itemContainer = document.querySelector('.items')
+
+
 
   const removeAllItems = () => {
     $('.items').empty()
