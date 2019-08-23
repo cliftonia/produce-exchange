@@ -51,14 +51,15 @@ end
 get '/api/my_items' do
   content_type :json
   items = Item.where(user_id: current_user.id)
-  photos = []
+  response = []
   items.each do |item|
-    photos << item.photos.first.image_link
+    object = {}
+    object[:title] = item.title
+    object[:url] = item.photos.first.image_link.url
+    object[:offers] = item.reviewer_offers.length
+    response << object
   end
-  {
-    items: items,
-    photos: photos
-  }.to_json
+  response.to_json
 end
 
 require_relative 'routes/users'

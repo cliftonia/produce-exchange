@@ -9,7 +9,7 @@
     <% @items.each do |item| %>
       <h3><%= item.title %></h3>
       <img src="<%= item.photos.first.image_link %>" alt="">
-      <p>offers: <%= item %></p>
+      <p>Number of offers: <%= item.reviewer_offers.length %></p>
     <% end %>
   </section>
 </main>
@@ -26,15 +26,19 @@
   }
 
   const addItemsToDom = response => {
-    for (var i = 0; i < response.items.length; i++) {
+    response.forEach(item => {
       const heading = document.createElement('h3')
-      heading.textContent = response.items[i].title
+      heading.textContent = item.title
       itemContainer.appendChild(heading)
 
       const image = document.createElement('img')
-      image.src = response.photos[i].url
+      image.src = item.url
       itemContainer.appendChild(image)
-    }
+
+      const paragraph = document.createElement('p')
+      paragraph.textContent = "Number of offers: " + item.offers
+      itemContainer.appendChild(paragraph)
+    });
   };
 
   const getMyItems = () => {
