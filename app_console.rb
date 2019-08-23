@@ -4,6 +4,7 @@ require 'sinatra/flash'
 require 'carrierwave'
 require 'carrierwave/orm/activerecord'
 require 'fog/aws'
+require 'geocoder'
 
 require_relative 'database_config'
 require_relative 'models/item'
