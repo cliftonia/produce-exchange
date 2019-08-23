@@ -31,6 +31,10 @@ post '/users' do
   user.address_line_1 = params[:address_line_1]
   user.suburb = params[:suburb]
   user.postcode = params[:postcode]
+  postcode = "http://v0.postcodeapi.com.au/suburbs/#{params[:postcode]}.json"
+  result = HTTParty.get(postcode)
+  user.lon = result[0]["longitude"]
+  user.lat = result[0]["latitude"]
   user.availability = params[:availability]
   if user.save
     redirect '/sessions/new'
@@ -75,6 +79,10 @@ put '/users/:id' do
   user.address_line_1 = params[:address_line_1]
   user.suburb = params[:suburb]
   user.postcode = params[:postcode]
+  postcode = "http://v0.postcodeapi.com.au/suburbs/#{params[:postcode]}.json"
+  result = HTTParty.get(postcode)
+  user.lon = result[0]["longitude"]
+  user.lat = result[0]["latitude"]
   user.availability = params[:availability]
   if user.authenticate(params[:password])
     user.password = params[:password]
@@ -91,3 +99,10 @@ put '/users/:id' do
     erb :user_edit
   end
 end
+
+# get '/api/location/postcode' do
+#   postcode = "http://v0.postcodeapi.com.au/suburbs/3000.json"
+#   result = HTTParty.get(postcode)
+#   result[0].to_json
+#   binding.pry
+# end

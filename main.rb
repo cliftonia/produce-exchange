@@ -4,6 +4,7 @@ require 'sinatra/flash'
 require 'carrierwave'
 require 'carrierwave/orm/activerecord'
 require 'fog/aws'
+require 'httparty'
 
 __FILE__
 require 'sinatra/reloader' if development?
@@ -45,6 +46,14 @@ end
 get '/' do
   erb :index
 end
+
+# get '/api/location/postcode' do
+#   postcode = "http://v0.postcodeapi.com.au/suburbs/3000.json"
+#   result = HTTParty.get(postcode)
+#   result[0].to_json
+#   binding.pry
+# end
+
 
 require_relative 'routes/users'
 require_relative 'routes/items'

@@ -1,0 +1,30 @@
+-- -37.8060083,144.9518452
+
+//IMPORTANT
+lat: -37.8232,
+    lon: 144.9729
+
+SELECT 
+id, username,
+asin(
+  sqrt(
+    sin(radians(lat-(-37.8232))/2)^2 +
+    sin(radians(lon-(144.9729))/2)^2 *
+    cos(radians(-37.8232)) *
+    cos(radians(lat))
+  )
+) * 7926.3352 AS distance
+FROM users
+;
+
+// bottom one was used and it is in kilometers whilst the above one is in miles 
+// hard  coded lon and lats need to be changed into the varialbles of the user
+
+SELECT id, username, postcode, 
+( 6371 * acos( cos( radians(-37.8060083) ) 
+* cos( radians( lat ) ) 
+* cos( radians( lon ) - radians(144.9518452) ) + sin( radians(-37.8060083) ) 
+* sin( radians( lat ) ) ) ) 
+AS calculated_distance 
+FROM users 
+ORDER BY calculated_distance;
