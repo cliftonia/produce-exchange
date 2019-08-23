@@ -4,25 +4,34 @@
   <option value="reviewer_offers">Review offers</option>
 </select>
 
+
 <section class="proposer-offers">
   <% @proposer_offers.each do |offer| %>
-    <div class="offer-card">
-      <p><%=offer.proposer_item.title%> <%=offer.proposer_item.quantity%> <%=offer.proposer_item.unit%></p>
+  <a href="/offers/<%=offer.id%>">
+    <div class="offer-card u-fu1ll-width">
+      <p><%=offer.proposer_item.title%> <%=offer.proposer_item_qty%> <%=offer.proposer_item.unit%></p>
       <img src="<%=Photo.where(item_id: offer.proposer_item.id).first.image_link%>" alt="">
+      <p><%=offer.proposer_item.user.username%></p>
     </div>
+  </a>
+  <form action="/offers/<%=offer.id%>/edit" >
+    <button>EDIT OFFER</button>
+  </form>
   <% end %>
 </section>
 
 <section class="reviewer-offers">
   <% @reviewer_offers.each do |offer| %>
-    <a href="/offer/<%=offer.id%>">
+    <a href="/offers/<%=offer.id%>">
       <div class="offer-card">
-        <p><%=offer.reviewer_item.title%> <%=offer.reviewer_item.quantity%><%=offer.reviewer_item.unit%></p>
+        <p><%=offer.reviewer_item.title%> <%=offer.reviewer_item_qty%><%=offer.reviewer_item.unit%></p>
         <img src="<%=Photo.where(item_id: offer.reviewer_item.id).first.image_link%>" alt="">
+        <p><%=offer.reviewer_item.user.username%></p>
       </div>
     </a>
   <% end %>
 </section>
+
 
 <script>
   var filterDropdown = document.querySelector('.filter-offer')

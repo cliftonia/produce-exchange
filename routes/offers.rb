@@ -5,12 +5,31 @@ get '/offers' do
   erb :offer_review
 end
 
-# params need to be sent from the items page
+get '/offers/:id/edit' do
+  @offer = Offer.find(params[:id])
+  erb :offer_edit
+end
+
 get '/offers/:item_id' do
   @proposed_items = Item.where(user_id: current_user.id)
   @reviewer_item = Item.find(params[:item_id])
   @photos = Photo.where(item_id: params[:item_id])
   erb :offer_new
+end
+
+put '/offers/:id' do
+  edit = Offer.find(params[:id])
+  edit.proposer_item_qty = params[:quantity]
+  if edit.save
+    redirect "/offers"
+  else
+    'not saved'
+  end
+end
+
+delete '/offers/:id' do
+  Offer.delete(params[:id])
+  redirect "/offers/#{params[:id]}"
 end
 
 post '/offers/new' do
@@ -20,12 +39,15 @@ post '/offers/new' do
   o.proposer_item_qty = params[:qty]
   o.reviewer_user_id = Item.find(params[:reviewer_item_id]).user_id
   o.reviewer_item_id = Item.find(params[:reviewer_item_id]).id
+  o.reviewer_item_qty = Item.find(params[:reviewer_item_id]).quantity
   if !params[:elsewhere].empty?
     o.meeting_point = params[:elsewhere]
   elsif params[:meeting_point] == 'yours'
-    o.meeting_point = "#{current_user.address_line_1}, #{current_user.suburb}"
+    o.meeting_point_suburb = current_user.address_line_1
+    o.meeting_point_suburb = current_user.suburb#{current_user.suburb}"
   elsif params[:meeting_point] == 'theirs'
-    o.meeting_point = "#{User.find(o.reviewer_user_id).address_line_1}, #{User.find(o.reviewer_user_id).suburb}"
+    o.meeting_point = User.find(o.reviewer_user_id).address_line_1
+    o.meeting_point_suburb = User.find(o.reviewer_user_id).suburb
   end
   o.status_id = 1
   o.save
@@ -38,12 +60,7 @@ get '/offer/:id' do
   @status = OfferStatus.find(@offer.status_id).stage
   proposed_user_id = @offer.proposer_item.user_id
   @photos = Photo.where(item_id: @offer.proposer_item.id)
-  # binding.pry
-
-  # here will be the details of the offer with accept or decline
-  # change the status depending on the action
   erb :offer_confirm
-  # "hey"
 end
 
 post '/api/offer_status' do
