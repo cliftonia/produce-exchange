@@ -20,6 +20,8 @@ CREATE TABLE items (
     id SERIAL PRIMARY KEY,
     title VARCHAR(300),
     description TEXT,
+    latitude float,
+    longitude float,
     quantity INTEGER,
     unit VARCHAR(50),
     user_id INTEGER,

@@ -10,6 +10,8 @@ post '/items' do
   item.quantity = params[:quantity]
   item.unit = params[:unit]
   item.user_id = current_user.id
+  item.latitude = current_user.lat
+  item.longitude = current_user.lon
   item.save
   
   photo = Photo.new
@@ -42,6 +44,8 @@ put '/items/:id' do
   item.description = params[:description]
   item.quantity = params[:quantity]
   item.unit = params[:unit]
+  item.latitude = current_user.lat
+  item.longitude = current_user.lon
   item.save
 
   photo = Photo.find_by(item_id: params[:id])
