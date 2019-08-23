@@ -7,8 +7,10 @@
 
   <section class="items">
     <% @items.each do |item| %>
-      <h3><%= item.title %></h3>
-      <img src="<%= item.photos.first.image_link %>" alt="">
+      <a href="/items/<%= item.id %>">
+        <h3><%= item.title %></h3>
+        <img src="<%= item.photos.first.image_link %>" alt="">
+      </a>
       <p>Number of offers: <%= item.reviewer_offers.length %></p>
     <% end %>
   </section>
@@ -19,24 +21,27 @@
   const myItemsBtn = document.querySelector('.my-items-btn')
   const itemContainer = document.querySelector('.items')
 
-
-
   const removeAllItems = () => {
     $('.items').empty()
   }
 
   const addItemsToDom = response => {
     response.forEach(item => {
+      const anchor = document.createElement('a')
+      anchor.href = `/items/${item.id}`
+
       const heading = document.createElement('h3')
       heading.textContent = item.title
-      itemContainer.appendChild(heading)
+      anchor.appendChild(heading)
 
       const image = document.createElement('img')
       image.src = item.url
-      itemContainer.appendChild(image)
+      anchor.appendChild(image)
+
+      itemContainer.appendChild(anchor)
 
       const paragraph = document.createElement('p')
-      paragraph.textContent = "Number of offers: " + item.offers
+      paragraph.textContent = `Number of offers:${item.offers}`
       itemContainer.appendChild(paragraph)
     });
   };

@@ -54,6 +54,7 @@ get '/api/my_items' do
   response = []
   items.each do |item|
     object = {}
+    object[:id] = item.id
     object[:title] = item.title
     object[:url] = item.photos.first.image_link.url
     object[:offers] = item.reviewer_offers.length
