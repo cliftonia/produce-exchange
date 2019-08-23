@@ -5,6 +5,7 @@ require 'carrierwave'
 require 'carrierwave/orm/activerecord'
 require 'fog/aws'
 require 'httparty'
+require 'geocoder'
 
 __FILE__
 require 'sinatra/reloader' if development?
@@ -62,6 +63,20 @@ get '/api/my_items' do
   end
   response.to_json
 end
+
+get '/api/sort_by_distance/:km' do
+  content_type :json
+
+  items = Item.near([current_user.lat, current_user.lon], params[:km], units: :km).to_json(include: :photos)
+
+  # sanitized_distance_query = ActiveRecord::Base.sanitize_sql_array ["( 6371 * acos( cos( radians(?) ) * cos( radians( lat ) ) * cos( radians( lon ) - radians(?) ) + sin( radians(?) ) * sin( radians( lat ) ) ) )", current_user.lat, current_user.lon, current_user.lat]
+
+  # sanitized_distance_query_with_alias = sanitized_distance_query + " AS calculated_distance"
+
+  # data = User.select("users.id, username, postcode #{sanitized_distance_query_with_alias}").joins(:items).where("#{sanitized_distance_query} < ?", params[:km]).order("calculated_distance")
+
+  # data.to_json
+end 
 
 require_relative 'routes/users'
 require_relative 'routes/items'
