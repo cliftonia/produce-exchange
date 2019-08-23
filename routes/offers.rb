@@ -49,7 +49,7 @@ end
 post '/api/offer_status' do
   content_type :json
   offer = Offer.find(params[:offer_id])
-  offer_status = OfferStatus.find(offer.status_id).stage
+  offer_status = OfferStatus.find(offer.status_id)
   if params[:class_name].include? 'accept'
     offer.status_id = 3
   elsif params[:class_name].include? 'decline'
@@ -57,7 +57,7 @@ post '/api/offer_status' do
   end
   if offer.save
     { message: 'Record saved!',
-      offer_status: offer_status
+      offer_status: OfferStatus.find(offer.status_id).stage,
     }.to_json
   end
 

@@ -1,6 +1,6 @@
 <h1>offer confirm</h1>
 
-<h2 class="offer-status"><%=@status%></h2>
+<h2 class="offer-status"></h2>
 <section class="proposer-item">
   <h2>Your item</h2>
   <%=@offer.proposer_item.title%>
@@ -13,6 +13,9 @@
   <%=@offer.reviewer_item.title%>
   <%=@offer.reviewer_item.quantity%><%=@offer.reviewer_item.unit%>
   <%=@offer.reviewer_item.user.username%>
+</section>
+<section class="meeting-point">
+  <%=@offer.meeting_point%>
 </section>
 
 <div class="offer-options">
@@ -36,6 +39,8 @@ var offerStatus = document.querySelector('.offer-status')
 
 var chooseOfferOption = function (event){
   event.preventDefault()
+  console.log(offerStatus.textContent) //coming up as opposite
+  offerStatus.textContent = ''
   var options = {
     method: 'post',
     url: '/api/offer_status',
@@ -44,8 +49,10 @@ var chooseOfferOption = function (event){
   }
 
   var updateOfferStatus = function(resp) {
-    offerAlert.textContent = resp.message
+    console.log(resp)
+    // event.target.className = resp.offer_status
     offerStatus.textContent = resp.offer_status
+    offerAlert.textContent = resp.message
   }
 
   $.ajax(options).done(updateOfferStatus)
