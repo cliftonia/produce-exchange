@@ -8,6 +8,8 @@ CREATE TABLE users (
     address_line_1 VARCHAR(300),
     suburb VARCHAR(100),
     postcode INTEGER,
+    lon float8,
+    lat float8,
     availability VARCHAR(400),
     avatar TEXT,
     created_at TIMESTAMP,
