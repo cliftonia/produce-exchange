@@ -1,5 +1,6 @@
 class Offer < ActiveRecord::Base
-    has_one :offer_status
+    belongs_to :status, class_name: 'OfferStatus', foreign_key: :status_id
+
     belongs_to :user
     belongs_to :proposer_item, class_name: 'Item'
     belongs_to :reviewer_item, class_name: 'Item'
