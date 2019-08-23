@@ -1,3 +1,8 @@
+<select name="filter" class="filter-offer">
+  <option value="all_offers">All offers</option>
+  <option value="proposer_offers">My proposed offers</option>
+  <option value="reviewer_offers">Review offers</option>
+</select>
 
 <section class="proposer-offers">
   <% @proposer_offers.each do |offer| %>
@@ -10,10 +15,37 @@
 
 <section class="reviewer-offers">
   <% @reviewer_offers.each do |offer| %>
-    <div class="offer-card">
-      <p><%=offer.reviewer_item.title%> <%=offer.reviewer_item.quantity%><%=offer.reviewer_item.unit%></p>
-      <img src="<%=Photo.where(item_id: offer.reviewer_item.id).first.image_link%>" alt="">
-    </div>
+    <a href="/offer/<%=offer.id%>">
+      <div class="offer-card">
+        <p><%=offer.reviewer_item.title%> <%=offer.reviewer_item.quantity%><%=offer.reviewer_item.unit%></p>
+        <img src="<%=Photo.where(item_id: offer.reviewer_item.id).first.image_link%>" alt="">
+      </div>
+    </a>
   <% end %>
 </section>
+
+<script>
+  var filterDropdown = document.querySelector('.filter-offer')
+  var proposerOffer = document.querySelector('.proposer-offers')
+  var reviewerOffer = document.querySelector('.reviewer-offers')
+
+  var filter = function (event){
+    switch (event.target.options.selectedIndex){
+      case 0:
+        proposerOffer.classList.remove('hide')
+        reviewerOffer.classList.remove('hide')
+        break;
+      case 1:
+        proposerOffer.classList.remove('hide')
+        reviewerOffer.classList.add('hide')
+        break;
+      case 2:
+        proposerOffer.classList.add('hide')
+        reviewerOffer.classList.remove('hide')
+        break;
+    }
+  }
+
+  filterDropdown.addEventListener('change', filter)
+</script>
 
