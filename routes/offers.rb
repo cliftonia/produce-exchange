@@ -82,6 +82,7 @@ post '/api/offer_status' do
     rev_item.save
   elsif params[:class_name].include? 'decline'
     offer.status_id = 2
+    Offer.delete(offer.id)
   end
   if offer.save
     { message: 'Record saved!',
