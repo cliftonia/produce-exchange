@@ -4,6 +4,7 @@ require 'sinatra/flash'
 require 'carrierwave'
 require 'carrierwave/orm/activerecord'
 require 'fog/aws'
+require 'httparty'
 
 __FILE__
 require 'sinatra/reloader' if development?
