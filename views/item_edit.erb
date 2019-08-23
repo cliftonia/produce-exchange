@@ -1,21 +1,24 @@
-<h1 class="edit-heading">Edit Produce for Trade</h1>
+<h1 class="edit-heading">Edit Item</h1>
 
 <div class="i-uploader">
   <form action="/items/<%= @item.id %>" method="post" enctype="multipart/form-data">
   <input type="hidden" name="_method" value="put">
-    <input class="choose-file" type="file" name="image_link" value="<%= @photo.image_link.identifier %>" />
+    
     <div class="new-title">
       <label for="">Title?</label>
       <input class="title-input" type="text" name="title" value="<%= @item.title%>">
     </div>
+
     <div class="new-description">
       <label for="">Description</label>
       <input class="description-input" type="text" name="description" value="<%= @item.description%>">
     </div>
+
     <div class="new-qty">
       <label for="">Qty</label>
       <input class="qty-input" type="text" name="quantity" value="<%= @item.quantity%>">
     </div>
+
     <div class="new-unit">
       <label for="">Unit</label>
       <select name="unit" id="">
@@ -26,8 +29,10 @@
         <option value="pcs">pcs</option>
       </select>
     </div>
+
     <div class="new-button">
       <button class="btn btn-success">Update</button>
     </div>
+    
   </form>
 </div>
