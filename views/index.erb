@@ -1,1 +1,48 @@
-<h1>hello world</h1>
+<main>
+  <section class=filters>
+    <button class="my-items-btn">My Items</button>
+  </section>
+
+  <section class="items">
+    <% @items.each do |item| %>
+      <h3><%= item.title %></h3>
+      <img src="<%= item.photos.first.image_link %>" alt="">
+      <p>offers: <%= item %></p>
+    <% end %>
+  </section>
+</main>
+
+
+<script>
+  const myItemsBtn = document.querySelector('.my-items-btn')
+  const itemContainer = document.querySelector('.items')
+
+  const removeAllItems = () => {
+    $('.items').empty()
+  }
+
+  const addItemsToDom = response => {
+    for (var i = 0; i < response.items.length; i++) {
+      const heading = document.createElement('h3')
+      heading.textContent = response.items[i].title
+      itemContainer.appendChild(heading)
+
+      const image = document.createElement('img')
+      image.src = response.photos[i].url
+      itemContainer.appendChild(image)
+    }
+  };
+
+  const getMyItems = () => {
+    $.ajax({url: '/api/my_items'}).done(response => {
+      addItemsToDom(response)
+    })
+  }
+
+  const showMyItems = () => {
+    removeAllItems()
+    getMyItems()
+  }
+
+  myItemsBtn.addEventListener('click', showMyItems)
+</script>
