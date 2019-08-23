@@ -44,16 +44,22 @@ after do
 end
 
 get '/' do
+  @items = Item.all
   erb :index
 end
 
-# get '/api/location/postcode' do
-#   postcode = "http://v0.postcodeapi.com.au/suburbs/3000.json"
-#   result = HTTParty.get(postcode)
-#   result[0].to_json
-#   binding.pry
-# end
-
+get '/api/my_items' do
+  content_type :json
+  items = Item.where(user_id: current_user.id)
+  photos = []
+  items.each do |item|
+    photos << item.photos.first.image_link
+  end
+  {
+    items: items,
+    photos: photos
+  }.to_json
+end
 
 require_relative 'routes/users'
 require_relative 'routes/items'
