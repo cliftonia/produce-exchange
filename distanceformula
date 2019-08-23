@@ -26,5 +26,118 @@ SELECT id, username, postcode,
 * cos( radians( lon ) - radians(144.9518452) ) + sin( radians(-37.8060083) ) 
 * sin( radians( lat ) ) ) ) 
 AS calculated_distance 
-FROM users 
+FROM users
 ORDER BY calculated_distance;
+
+
+
+SELECT id, username, postcode, 
+( 6371 * acos( cos( radians(-37.8060083) ) 
+* cos( radians( lat ) ) 
+* cos( radians( lon ) - radians(144.9518452) ) + sin( radians(-37.8060083) ) 
+* sin( radians( lat ) ) ) ) 
+AS calculated_distance 
+FROM users
+WHERE ( 6371 * acos( cos( radians(-37.8060083) ) 
+* cos( radians( lat ) ) 
+* cos( radians( lon ) - radians(144.9518452) ) + sin( radians(-37.8060083) ) 
+* sin( radians( lat ) ) ) ) < 3
+ORDER BY calculated_distance;
+
+@comments = Like
+              .select("comment_id, COUNT(*) AS likes")
+              .where("comment_id IN (SELECT id FROM comments WHERE picture_id = ?)", @picture.id)
+              .group(:comment_id)
+              .order(likes: :desc)
+
+              
+# sanitized_distance_query = ActiveRecord::Base.sanitize_sql_array ["( 6371 * acos( cos( radians(?) ) * cos( radians( lat ) ) * cos( radians( lon ) - radians(?) ) + sin( radians(?) ) * sin( radians( lat ) ) ) )", current_user.lat, current_user.lon, current_user.lat]
+
+# sanitized_distance_query_with_alias = sanitized_distance_query + " AS calculated_distance"
+
+# data = User.select("id, username, postcode, #{sanitized_distance_query_with_alias}").where("#{sanitized_distance_query} < ?", 3).order("calculated_distance")
+
+
+SELECT id, username, postcode, 
+( 6371 * acos( cos( radians(-37.8060083) ) 
+* cos( radians( lat ) ) 
+* cos( radians( lon ) - radians(144.9518452) ) + sin( radians(-37.8060083) ) 
+* sin( radians( lat ) ) ) ) 
+AS calculated_distance 
+FROM users
+ORDER BY calculated_distance;
+
+
+
+SELECT id, username, postcode, 
+( 6371 * acos( cos( radians(-37.8060083) ) 
+* cos( radians( lat ) ) 
+* cos( radians( lon ) - radians(144.9518452) ) + sin( radians(-37.8060083) ) 
+* sin( radians( lat ) ) ) ) 
+AS calculated_distance 
+FROM users
+WHERE ( 6371 * acos( cos( radians(-37.8060083) ) 
+* cos( radians( lat ) ) 
+* cos( radians( lon ) - radians(144.9518452) ) + sin( radians(-37.8060083) ) 
+* sin( radians( lat ) ) ) ) < 3
+ORDER BY calculated_distance;
+ 
+User
+              .select("id, username, postcode, ( 6371 * acos( cos( radians(?) ) 
+              * cos( radians( lat ) ) 
+              * cos( radians( lon ) - radians(?) ) + sin( radians(?) ) 
+              * sin( radians( lat ) ) ) ) 
+              AS calculated_distance ", current_user.lat, current_user.lon, current_user.lat)
+              .where("( 6371 * acos( cos( radians(?) ) 
+              * cos( radians( lat ) ) 
+              * cos( radians( lon ) - radians(?) ) + sin( radians(?) ) 
+              * sin( radians( lat ) ) ) ) < ?", current_user.lat, current_user.lon, current_user.lat, 3)
+              .order("calculated_distance")
+
+
+// current_user.lat
+// current_user.lon
+
+
+
+SELECT id, username, postcode, 
+( 6371 * acos( cos( radians(-37.8060083) ) 
+* cos( radians( lat ) ) 
+* cos( radians( lon ) - radians(144.9518452) ) + sin( radians(-37.8060083) ) 
+* sin( radians( lat ) ) ) ) 
+AS calculated_distance 
+FROM users
+ORDER BY calculated_distance;
+
+
+
+SELECT id, username, postcode, 
+( 6371 * acos( cos( radians(-37.8060083) ) 
+* cos( radians( lat ) ) 
+* cos( radians( lon ) - radians(144.9518452) ) + sin( radians(-37.8060083) ) 
+* sin( radians( lat ) ) ) ) 
+AS calculated_distance 
+FROM users
+WHERE ( 6371 * acos( cos( radians(-37.8060083) ) 
+* cos( radians( lat ) ) 
+* cos( radians( lon ) - radians(144.9518452) ) + sin( radians(-37.8060083) ) 
+* sin( radians( lat ) ) ) ) < 3
+ORDER BY calculated_distance;
+
+
+
+current_user = User.last
+data = User
+              .select("id, username, postcode, ( 6371 * acos( cos( radians(?) ) 
+              * cos( radians( lat ) ) 
+              * cos( radians( lon ) - radians(?) ) + sin( radians(?) ) 
+              * sin( radians( lat ) ) ) ) 
+              AS calculated_distance ", current_user.lat, current_user.lon, current_user.lat)
+              .where("( 6371 * acos( cos( radians(?) ) 
+              * cos( radians( lat ) ) 
+              * cos( radians( lon ) - radians(?) ) + sin( radians(?) ) 
+              * sin( radians( lat ) ) ) ) < ?", current_user.lat, current_user.lon, current_user.lat, 3)
+              .order("calculated_distance")
+
+
+# data = User.select("id, username, postcode, ( 6371 * acos( cos( radians(?) ) * cos( radians( lat ) ) * cos( radians( lon ) - radians(?) ) + sin( radians(?) ) * sin( radians( lat ) ) ) ) AS calculated_distance ", current_user.lat, current_user.lon, current_user.lat).where("( 6371 * acos( cos( radians(?) ) * cos( radians( lat ) ) * cos( radians( lon ) - radians(?) ) + sin( radians(?) ) * sin( radians( lat ) ) ) ) < ?", current_user.lat, current_user.lon, current_user.lat, 3).order("calculated_distance")
