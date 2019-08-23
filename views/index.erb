@@ -2,6 +2,11 @@
   <section class=filters>
     <% if logged_in? %>
       <button class="my-items-btn">My Items</button>
+      <form action="">
+        <label for="">Sort by Distance</label>
+        <input class="distance-input" type="text">
+        <button class="distance-btn">Filter</button>
+      </form>
     <% end %>
   </section>
 
@@ -20,6 +25,9 @@
 <script>
   const myItemsBtn = document.querySelector('.my-items-btn')
   const itemContainer = document.querySelector('.items')
+
+  const distanceInput = document.querySelector('.distance-input')
+  const distanceBtn = document.querySelector('.distance-btn')
 
   const removeAllItems = () => {
     $('.items').empty()
@@ -57,5 +65,35 @@
     getMyItems()
   }
 
+  const addItemByDistance = response => {
+    console.log("addItemByDistanceRouteWorking")
+    for (var i = 0; i < response.length; i++) {
+      const heading = document.createElement('h3')
+      heading.textContent = response[i].title
+      itemContainer.appendChild(heading)
+
+      const image = document.createElement('img')
+      image.src = response[i].photos[0].image_link.url
+      itemContainer.appendChild(image)
+    }
+  };
+
+  const getItemsByDistance = () => {
+    $.ajax({url: `/api/sort_by_distance/${distanceInput.value}`}).done(response => {
+      console.log(response)
+      addItemByDistance(response)
+    })
+  }
+
+  const sortByDistance = () => {
+    event.preventDefault()
+    removeAllItems()
+    getItemsByDistance()
+    console.log("oh yeah")
+  }
+
   myItemsBtn.addEventListener('click', showMyItems)
+
+  distanceBtn.addEventListener('click', sortByDistance)
+
 </script>
