@@ -1,6 +1,6 @@
 :root {
   --text: #666666;
-  
+
   --main: #f68787;
   --secondary: #ffba92;
   --tertiary: #e0f5b9;
@@ -14,4 +14,49 @@
 
 img {
   width: 300px;
+}
+
+.hide {
+  display: none;
+}
+
+.on-offer {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  background-color: #f68787;
+  border-radius: 2rem;
+}
+
+.on-offer p, .on-offer img {
+  font-size: 2rem;
+  text-align: center;
+  margin: 0 auto;
+  padding: 1rem;
+  width: 300px;
+  font: var(--text);
+}
+
+.your-offers {
+  margin: 0;
+  font-size: 2rem;
+  background-color: var(--tertiary);
+  border-radius: 2rem;
+}
+.your-offers p{
+  font-size: 2rem;
+  margin-left: 2rem;
+}
+
+.review-item {
+  background-color: #a4f6a5;
+}
+
+.proposer-item {
+  background-color: #f68787;
+}
+
+.round {
+  border-radius: 2rem;
+  padding-left: 2rem;
 }
