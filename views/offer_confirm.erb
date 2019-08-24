@@ -1,32 +1,35 @@
-<h1>offer confirm</h1>
+<h2>Confirm Offer</h2>
 
-<h2 class="offer-status"></h2>
+<div class="confirm-conatiner">
+  <section class="proposer-item card">
+  <% if @offer.proposer_item.user.id === current_user.id%>
+    <h2>Your item</h2>
+  <% else %>
+    <h2>Their item</h2>
+  <% end %>
+    <img src="<%=@offer.proposer_item.photos.first.image_link%>" alt="">
+    <p><%=@offer.proposer_item.title%></p>
+    <p><%=@offer.proposer_item_qty%><%=@offer.proposer_item.unit%></p>
+    <p><%=@offer.proposer_item.user.username%></p>
+  </section>
 
-<section class="proposer-item">
-<% if @offer.proposer_item.user.id === current_user.id%>
-  <h2>Your item</h2>
-<% else %>
-  <h2>Their item</h2>
-<% end %>
-  <%=@offer.proposer_item.title%>
-  <%=@offer.proposer_item_qty%><%=@offer.proposer_item.unit%>
-  <%=@offer.proposer_item.user.username%>
-</section>
-
-<section class="review-item">
-<% if @offer.reviewer_item.user.id === current_user.id%>
-  <h2>Your item</h2>
-<% else %>
-  <h2>Their item</h2>
-<% end %>
-  <%=@offer.reviewer_item.title%>
-  <%=@offer.reviewer_item_qty%><%=@offer.reviewer_item.unit%>
-  <%=@offer.reviewer_item.user.username%>
-</section>
+  <section class="review-item card">
+  <% if @offer.reviewer_item.user.id === current_user.id%>
+    <h2>Your item</h2>
+  <% else %>
+    <h2>Their item</h2>
+  <% end %>
+    <img src="<%=@offer.reviewer_item.photos.first.image_link%>" alt="">
+    <%=@offer.reviewer_item.title%>
+    <%=@offer.reviewer_item_qty%><%=@offer.reviewer_item.unit%>
+    <%=@offer.reviewer_item.user.username%>
+  </section>
+</div>
 
 <section class="meeting-point">
   <p>Meeting Point: <%=@offer.meeting_point_suburb%></p>
 </section>
+
 
 <div class="offer-options">
   <form action="/offers/accepted">
@@ -36,7 +39,6 @@
     <button data-offer-id="<%=@offer.id%>" class="decline offer">DECLINE</button>
   </form>
 </div>
-<h2 class="offer-alert"></h2>
 
 <script src="https://code.jquery.com/jquery-3.4.1.js"
   integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
@@ -46,10 +48,13 @@
 var offerOptions = document.querySelector('.offer-options')
 var offerAlert = document.querySelector('.offer-alert')
 var offerStatus = document.querySelector('.offer-status')
+var yourItemHeading = document.querySelector('.proposer-item h2')
 
-var chooseOfferOption = function (event){
-  event.preventDefault()
-  console.log(offerStatus.textContent) //coming up as opposite
+var removeButtons = () => {
+  offerOptions.classList.add('hide')
+}
+
+var chooseOfferOption = event => {
   offerStatus.textContent = ''
   var options = {
     method: 'post',
@@ -58,14 +63,15 @@ var chooseOfferOption = function (event){
     class_name: event.target.className }
   }
 
-  var updateOfferStatus = function(resp) {
-    console.log(resp)
-    // event.target.className = resp.offer_status
+  var updateOfferStatus = resp => {
     offerStatus.textContent = resp.offer_status
-    offerAlert.textContent = resp.message
   }
 
   $.ajax(options).done(updateOfferStatus)
+}
+
+if (yourItemHeading.textContent == 'Your item') {
+  removeButtons()
 }
 
 offerOptions.addEventListener('click', chooseOfferOption)
