@@ -15,6 +15,7 @@ GEM
       zeitwerk (~> 2.1, >= 2.1.8)
     addressable (2.6.0)
       public_suffix (>= 2.0.2, < 4.0)
+    bcrypt (3.1.13)
     builder (3.2.3)
     carrierwave (2.0.0)
       activemodel (>= 5.0.0)
@@ -301,6 +302,7 @@ PLATFORMS
 
 DEPENDENCIES
   activerecord
+  bcrypt
   carrierwave
   fog
   fog-aws
