@@ -4,7 +4,6 @@ get '/items/new' do
 end
 
 get '/api/items' do
-  # binding.pry
   content_type :json
   item_details = Item.find(params[:item_id])
   {

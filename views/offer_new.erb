@@ -25,12 +25,12 @@
     <label class="offer-unit">unit</label>
 
     <label for="meeting_point">Meeting point</label>
-    <select name="meeting_point" id="">
+    <select name="meeting_point" id="" class="meeting-point">
       <option value="yours">your location</option>
       <option value="theirs">their location</option>
       <option value="elsewhere">elsewhere</option>
     </select>
-    <input type="text" name="elsewhere" placeholder="Suggest elsewhere">
+    <input type="text" name="elsewhere" placeholder="Suggest elsewhere" class="elsewhere-field hide">
     <input type="hidden" name="reviewer_item_id" value="<%=@reviewer_item.id%>">
     <button>make offer</button>
   </form>
@@ -45,6 +45,8 @@
 var selectItem = document.querySelector('.select-item')
 var offerQty = document.querySelector('.offer-qty')
 var offerUnit = document.querySelector('.offer-unit')
+var selectMeetingPoint = document.querySelector('.meeting-point')
+var elsewhereField = document.querySelector('.elsewhere-field')
 
 var selectFromYourItems = event => {
   var options = {
@@ -58,6 +60,13 @@ var selectFromYourItems = event => {
   $.ajax(options).done(getItemDetails)
 }
 
+var setMeetingPoint = event => {
+  console.log(event.target)
+  if (event.target.value == 'elsewhere') {
+    elsewhereField.classList.remove('hide')
+  }
+}
 
+selectMeetingPoint.addEventListener('change', setMeetingPoint)
 selectItem.addEventListener('change', selectFromYourItems)
 </script>
