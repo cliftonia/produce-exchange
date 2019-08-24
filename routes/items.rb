@@ -22,7 +22,6 @@ post '/items' do
   item.latitude = current_user.lat
   item.longitude = current_user.lon
 
-  
   if item.save
     photo = Photo.new
     photo.image_link = params[:image_link]
@@ -47,10 +46,8 @@ get '/items/:id' do
   erb :item_show
 end
 
-
 get '/items/:id/edit' do 
   @error_messages = []
-
   @item = Item.find(params[:id])
   @photos = @item.photos
   erb :item_edit
@@ -64,25 +61,14 @@ put '/items/:id' do
   item.quantity = params[:quantity]
   item.latitude = current_user.lat
   item.longitude = current_user.lon
-
   item.unit = params[:unit]
-  # item.save 
 
   if item.save
     redirect "/items/#{item.id}"
   else
     @error_messages = ["Quantity and Units are needed"]
     redirect "/items/#{item.id}/edit"
-    # erb :item_edit ---- this is created an error will need to work this out later 
   end
-
-  # photo = Photo.find_by(item_id: params[:id])
-
-  # photo.image_link = params[:image_link]
-
-  # photo.save
-
-  # redirect "/items/#{item.id}"
 end
 
 delete '/items/:id' do
