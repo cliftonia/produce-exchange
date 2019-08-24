@@ -4,7 +4,7 @@
       <button class="my-items-btn">My Items</button>
       <form action="">
         <label for="">Sort by Distance</label>
-        <input class="distance-input" type="text">
+        <input class="distance-input" type="text" placeholder="Kilometres">
         <button class="distance-btn">Filter</button>
       </form>
     <% end %>
@@ -67,14 +67,21 @@
 
   const addItemByDistance = response => {
     console.log("addItemByDistanceRouteWorking")
-    for (var i = 0; i < response.length; i++) {
-      const heading = document.createElement('h3')
-      heading.textContent = response[i].title
-      itemContainer.appendChild(heading)
 
-      const image = document.createElement('img')
-      image.src = response[i].photos[0].image_link.url
-      itemContainer.appendChild(image)
+    for (var i = 0; i < response.length; i++) {
+      // if (response[i].id !== response[i].user_id) {
+        const heading = document.createElement('h3')
+        heading.textContent = response[i].title
+        itemContainer.appendChild(heading)
+
+        const distance = document.createElement('p')
+        distance.textContent = Math.round(response[i].distance) + "KM"
+        itemContainer.appendChild(distance)
+  
+        const image = document.createElement('img')
+        image.src = response[i].photos[0].image_link.url
+        itemContainer.appendChild(image)
+      // }
     }
   };
 
