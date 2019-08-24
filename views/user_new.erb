@@ -4,7 +4,7 @@
   <% @error_messages.each do |message| %>
     <p><%= message %></p>
   <% end %>
-  
+
   <form action="/users" method="post">
     <input class="u-full-width" type="email" placeholder="Email*" name="email">
     <input class="u-full-width" type="text" placeholder="Username*" name="username">
@@ -13,6 +13,6 @@
     <input class="u-full-width" type="text" placeholder="Suburb" name="suburb">
     <input class="u-full-width" type="text" placeholder="Postcode*" name="postcode">
     <input class="u-full-width" type="text" placeholder="Availability" name="availability">
-    <button class="u-full-width button-primary">Create account</button>
+    <button class="u-full-width">Create account</button>
   </form>
 </main>

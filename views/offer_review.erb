@@ -10,7 +10,7 @@
   <a href="/offer/<%=offer.id%>">
     <div class="offer-card u-fu1ll-width">
       <p><%=offer.proposer_item.title%> <%=offer.proposer_item_qty%> <%=offer.proposer_item.unit%></p>
-      <img src="<%=Photo.where(item_id: offer.proposer_item.id).first.image_link%>" alt="">
+      <img src="<%#=Photo.where(item_id: offer.proposer_item.id).first.image_link%>" alt="">
       <p><%=offer.proposer_item.user.username%></p>
     </div>
   </a>
@@ -25,7 +25,7 @@
     <a href="/offer/<%=offer.id%>">
       <div class="offer-card">
         <p><%=offer.reviewer_item.title%> <%=offer.reviewer_item_qty%><%=offer.reviewer_item.unit%></p>
-        <img src="<%=Photo.where(item_id: offer.reviewer_item.id).first.image_link%>" alt="">
+        <img src="<%#=Photo.where(item_id: offer.reviewer_item.id).first.image_link%>" alt="">
         <p><%=offer.reviewer_item.user.username%></p>
       </div>
     </a>
