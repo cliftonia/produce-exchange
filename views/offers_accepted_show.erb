@@ -5,10 +5,11 @@
   <p><%= @offer.proposer_item_qty %><%= @offer.proposer_item.unit %>  <%= @offer.proposer_item.title %> for <%= @offer.reviewer_item_qty %><%= @offer.reviewer_item.unit %>  <%= @offer.reviewer_item.title %></p>
   <img style="width: 49%" src="<%= @offer.proposer_item.photos.first.image_link %>" alt="">
   <img style="width: 49%" src="<%= @offer.reviewer_item.photos.first.image_link %>" alt="">
-  <p>Meeing point: <%= @offer.meeting_point %></p>
-  <p>Contact details for <%= @contact_username %>: <%= @contact_email %></p>
+  <p>Meeing point: <%= @offer.meeting_point_suburb %></p>
+  <p>Preferred time for <%= @contact_username %>: <%= @contact_availability %></p>
+  <p>Contact details: <%= @contact_email %></p>
   <form action="/offers/complete/<%= @offer.id %>" method="post">
     <input type="hidden" name="_method" value="put">
-    <button class="button-primary">Mark as complete</button>
+    <button class="button-primary u-full-width">Mark as complete</button>
   </form>
 </div>
