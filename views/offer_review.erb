@@ -1,32 +1,32 @@
-<select name="filter" class="filter-offer">
-  <option value="all_offers">All offers</option>
-  <option value="proposer_offers">My proposed offers</option>
-  <option value="reviewer_offers">Review offers</option>
-</select>
-
+<section class="filter-offers">
+  <label for="filter-offer">Filter</label>
+  <select name="filter" class="filter-offer u-full-width">
+    <option value="all_offers">All offers</option>
+    <option value="proposer_offers">My proposed offers</option>
+    <option value="reviewer_offers">Review offers</option>
+  </select>
+</section>
 
 <section class="proposer-offers">
   <% @proposer_offers.each do |offer| %>
   <a href="/offer/<%=offer.id%>">
-    <div class="offer-card u-fu1ll-width">
-      <p><%=offer.proposer_item.title%> <%=offer.proposer_item_qty%> <%=offer.proposer_item.unit%></p>
-      <img src="<%#=Photo.where(item_id: offer.proposer_item.id).first.image_link%>" alt="">
-      <p><%=offer.proposer_item.user.username%></p>
-    </div>
+    <div class="offer-card card">
+      <p><%=offer.proposer_item.user.username%> has <%=offer.proposer_item_qty%> <%=offer.proposer_item.unit%> <%=offer.proposer_item.title%></p>
+      <img src="<%=offer.proposer_item.photos.first.image_link%>" alt="">
   </a>
-  <form action="/offers/<%=offer.id%>/edit" >
+  <form action="/offers/<%=offer.id%>/edit" class="edit-offer">
     <button>EDIT OFFER</button>
   </form>
+    </div>
   <% end %>
 </section>
 
 <section class="reviewer-offers">
   <% @reviewer_offers.each do |offer| %>
     <a href="/offer/<%=offer.id%>">
-      <div class="offer-card">
+      <div class="offer-card card">
         <p><%=offer.reviewer_item.title%> <%=offer.reviewer_item_qty%><%=offer.reviewer_item.unit%></p>
-        <img src="<%#=Photo.where(item_id: offer.reviewer_item.id).first.image_link%>" alt="">
-        <p><%=offer.reviewer_item.user.username%></p>
+        <img src="<%=offer.reviewer_item.photos.first.image_link%>" alt="">
       </div>
     </a>
   <% end %>
