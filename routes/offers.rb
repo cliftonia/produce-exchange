@@ -1,5 +1,24 @@
+get '/offers/accepted/:id' do
+  @offer = Offer.find(params[:id])
+  if @offer.proposer_user_id == current_user.id
+    @contact_username = @offer.reviewer_user.username
+    @contact_email = @offer.reviewer_user.email
+  else
+    @contact_username = @offer.proposer_user.username
+    @contact_email = @offer.proposer_user.email
+  end
+  erb :offers_accepted_show
+end
+
+put '/offers/complete/:id' do
+  offer = Offer.find(params[:id])
+  offer.status_id = 4
+  offer.save
+  redirect '/offers/accepted'
+end
+
 get '/offers/accepted' do
-  @offers = Offer.all
+  @my_offers = Offer.where("proposer_user_id = ? OR reviewer_user_id = ?", current_user.id, current_user.id)
   erb :offers_accepted
 end
 

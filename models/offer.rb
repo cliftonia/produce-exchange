@@ -4,6 +4,8 @@ class Offer < ActiveRecord::Base
     belongs_to :user
     belongs_to :proposer_item, class_name: 'Item'
     belongs_to :reviewer_item, class_name: 'Item'
+    belongs_to :proposer_user, class_name: 'User'
+    belongs_to :reviewer_user, class_name: 'User'
 
     # validates :proposer_user_id, presence: true
     # validates :proposer_item_id, presence: true

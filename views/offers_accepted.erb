@@ -1,5 +1,25 @@
-<% @offers.each do |offer| %>
-  <p>Proposer: <%= offer.proposer_item.user.username %></p>
-  <p>Reviewer: <%= offer.reviewer_item.user.username %></p>
-  <p>Status: <%= offer.status.stage %></p>
+<h3>Accepted Offers</h3>
+<% @my_offers.each do |offer| %>
+  <% if offer.status_id == 3 %>
+    <a href="/offers/accepted/<%= offer.id %>">
+      <div style="border: 1px black solid; margin-bottom: 1em; padding: 1em;">
+        <p>Offer between: <%= offer.proposer_item.user.username %> and <%= offer.reviewer_item.user.username %> on <%= offer.created_at.strftime("%a, %e %b %Y") %></p>
+        <p><%= offer.proposer_item_qty %><%= offer.proposer_item.unit %>  <%= offer.proposer_item.title %> for <%= offer.reviewer_item_qty %><%= offer.reviewer_item.unit %>  <%= offer.reviewer_item.title %></p>
+        <img style="width: 49%" src="<%= offer.proposer_item.photos.first.image_link %>" alt="">
+        <img style="width: 49%" src="<%= offer.reviewer_item.photos.first.image_link %>" alt="">
+      </div>
+    </a>
+  <% end %>
+<% end %>
+
+<h3>Completed Transactions</h3>
+<% @my_offers.each do |offer| %>
+  <% if offer.status_id == 4 %>
+    <div style="border: 1px black solid; margin-bottom: 1em; padding: 1em;">
+        <p>Transaction between: <%= offer.proposer_item.user.username %> and <%= offer.reviewer_item.user.username %> on <%= offer.created_at.strftime("%a, %e %b %Y") %></p>
+        <p><%= offer.proposer_item_qty %><%= offer.proposer_item.unit %>  <%= offer.proposer_item.title %> for <%= offer.reviewer_item_qty %><%= offer.reviewer_item.unit %>  <%= offer.reviewer_item.title %></p>
+        <img style="width: 49%" src="<%= offer.proposer_item.photos.first.image_link %>" alt="">
+        <img style="width: 49%" src="<%= offer.reviewer_item.photos.first.image_link %>" alt="">
+      </div>
+  <% end %>
 <% end %>
