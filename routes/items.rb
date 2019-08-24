@@ -21,21 +21,7 @@ post '/items' do
   item.user_id = current_user.id
   item.latitude = current_user.lat
   item.longitude = current_user.lon
-<<<<<<< HEAD
 
-=======
-<<<<<<< HEAD
-  item.save
-
-  photo = Photo.new
-  photo.image_link = params[:image_link]
-  photo.item_id = item.id
-  photo.save
-
-  redirect "/items/#{item.id}"
-=======
->>>>>>> add code that prints the error messages onto the page
-  
   if item.save
     photo = Photo.new
     photo.image_link = params[:image_link]
@@ -49,10 +35,6 @@ post '/items' do
     erb :item_new
   end
   
-<<<<<<< HEAD
-=======
->>>>>>> add code that prints the error messages onto the page
->>>>>>> add code that prints the error messages onto the page
 end
 
 get '/items/:id' do
@@ -64,19 +46,8 @@ get '/items/:id' do
   erb :item_show
 end
 
-<<<<<<< HEAD
-
 get '/items/:id/edit' do 
   @error_messages = []
-
-=======
-<<<<<<< HEAD
-get '/items/:id/edit' do
-=======
-get '/items/:id/edit' do 
-  @error_messages = []
->>>>>>> add code that prints the error messages onto the page
->>>>>>> add code that prints the error messages onto the page
   @item = Item.find(params[:id])
   @photos = @item.photos
   erb :item_edit
@@ -90,36 +61,14 @@ put '/items/:id' do
   item.quantity = params[:quantity]
   item.latitude = current_user.lat
   item.longitude = current_user.lon
-<<<<<<< HEAD
-
   item.unit = params[:unit]
-<<<<<<< HEAD
-=======
-  item.save
-=======
-  item.unit = params[:unit]
->>>>>>> add code that prints the error messages onto the page
-  # item.save 
 
   if item.save
     redirect "/items/#{item.id}"
   else
     @error_messages = ["Quantity and Units are needed"]
     redirect "/items/#{item.id}/edit"
-    # erb :item_edit ---- this is created an error will need to work this out later 
   end
-<<<<<<< HEAD
-=======
->>>>>>> add code that prints the error messages onto the page
->>>>>>> add code that prints the error messages onto the page
-
-  # photo = Photo.find_by(item_id: params[:id])
-
-  # photo.image_link = params[:image_link]
-
-  # photo.save
-
-  # redirect "/items/#{item.id}"
 end
 
 delete '/items/:id' do
