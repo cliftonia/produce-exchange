@@ -10,7 +10,7 @@
 
 <h1> <%= @item.title %> </h1>
 
-<h2>Description</h2>
+<h4>Description</h4>
 <p> <%= @item.description %> </p>
 <h3>posted by: <%= @item.user.username %></h3>
 
@@ -18,7 +18,7 @@
 <p> <%= @item.quantity%> <%= @item.unit%> </p>
 
 <% if logged_in? && current_user.id == @item.user_id%>
-  
+
   <form action="/items/<%= @item.id %>" method="post">
     <input type="hidden" name="_method" value="delete">
     <button>delete</button>

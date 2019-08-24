@@ -1,5 +1,5 @@
 :root {
-  --text: #666666;
+  --text: #333333;
 
   --main: #f68787;
   --secondary: #ffba92;
@@ -13,10 +13,58 @@
 }
 
 img {
-  width: 300px;
+  width: 100%;
+  border-radius: 2rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+a {
+  text-decoration: none;
+  color: var(--text);
 }
 
 .hide {
   display: none;
 }
 
+body {
+  background-color: var(--main);
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+button {
+  background-color: var(--quarternary);
+  color: var(--text);
+
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  margin: 0 auto;
+  background-color: var(--secondary);
+}
+
+nav {
+  display: flex;
+  justify-content: space-around;
+  overflow: hidden;
+}
+
+nav a {
+  padding: 0.5em;
+}
+
+p {
+  font-size: 1.8rem;
+}
+
+.main-header {
+  background-color: var(--tertiary);
+  padding: 0.5em;
+}
+.main-header p {
+  margin-bottom: 0;
+}

@@ -9,32 +9,31 @@
   <link rel='stylesheet' href='/stylesheets/main.css'>
 </head>
 <body>
-  <div class="container">
+  <header class="main-header">
     <% if logged_in? %>
-      <p>logged in as: <%= current_user.email %></p>
-      <form action="/sessions" method="post">
-        <input type="hidden" name="_method" value="delete">
-        <button>Logout</button>
-      </form>
+      <p>logged in as: <%= current_user.username %></p>
     <% else %>
       <a href="/sessions/new">Login</a>
     <% end %>
+  </header>
 
+  <div class="container">
     <%= yield %>
 
-    <footer>
-      <nav>
-        <a href="/items/new">Add new item</a>
-        <a href="/offers">Offers</a>
-        <a href="/users/:id">Account</a>
-        <a href="/">Home</a>
-      </nav>
-    </footer>
+  </div>
+  <footer>
+    <nav>
+      <a href="/items/new">Add new item</a>
+      <a href="/offers">Offers</a>
+      <a href="/users/:id">Account</a>
+      <a href="/">Home</a>
+    </nav>
+  </footer>
     <script
     src="https://code.jquery.com/jquery-3.4.1.js"
     integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
     crossorigin="anonymous"></script>
-  </div>
   <script src="/javascripts/application.js"></script>
+
 </body>
 </html>

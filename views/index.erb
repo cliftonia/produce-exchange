@@ -1,11 +1,11 @@
 <main>
   <section class=filters>
     <% if logged_in? %>
-      <button class="my-items-btn">My Items</button>
+      <button class="my-items-btn u-full-width">My Items</button>
       <form action="">
         <label for="">Sort by Distance</label>
-        <input class="distance-input" type="text" placeholder="Kilometres">
-        <button class="distance-btn">Filter</button>
+        <input class="distance-input six columns" type="text" placeholder="Kilometres">
+        <button class="distance-btn six columns">Filter</button>
       </form>
     <% end %>
   </section>
@@ -77,7 +77,7 @@
         const distance = document.createElement('p')
         distance.textContent = Math.round(response[i].distance) + "KM"
         itemContainer.appendChild(distance)
-  
+
         const image = document.createElement('img')
         image.src = response[i].photos[0].image_link.url
         itemContainer.appendChild(image)
