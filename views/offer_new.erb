@@ -14,17 +14,16 @@
 <section class="make-offer-form">
   <form action="/offers/new" method="post">
     <label for="">your items</label>
-      <select name="item_id" id="" class="">
+      <select name="item_id" id="" class="select-item">
+        <option value="" disabled selected>Choose from your list</option>
         <% @proposed_items.each do |item| %>
           <option name="item_id" value="<%=item.id%>"><%=item.title%></option>
         <% end %>
       </select>
-    <input type="text" name="qty" placeholder="quantity">
-    <select name="unit" id="">
-      <option value="kg">kg</option>
-      <option value="g">g</option>
-      <option value="pcs">pcs</option>
-    </select>
+
+    <input class="offer-qty" type="number" step=".01" name="qty" placeholder="quantity">
+    <label class="offer-unit">unit</label>
+
     <label for="meeting_point">Meeting point</label>
     <select name="meeting_point" id="">
       <option value="yours">your location</option>
@@ -43,18 +42,22 @@
 
 <script>
 
-var makeOfferForm = document.querySelector('.make-offer-form')
-var handleClick = event => {
-  console.log(event.target)
+var selectItem = document.querySelector('.select-item')
+var offerQty = document.querySelector('.offer-qty')
+var offerUnit = document.querySelector('.offer-unit')
 
+var selectFromYourItems = event => {
   var options = {
-    url: '/api/offers',
+    url: '/api/items',
+    data: { item_id: event.target.value }
   }
-  var handleDone = function(resp) {
-    console.log(resp)
+  var getItemDetails = resp => {
+    offerQty.max = resp.item_qty
+    offerUnit.textContent = resp.item_units
   }
-  $.ajax(options).done(handleDone)
+  $.ajax(options).done(getItemDetails)
 }
-makeOfferForm.addEventListener('click', handleClick)
 
+
+selectItem.addEventListener('change', selectFromYourItems)
 </script>
