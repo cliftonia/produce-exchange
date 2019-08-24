@@ -35,22 +35,24 @@
 
   const addItemsToDom = response => {
     response.forEach(item => {
-      const anchor = document.createElement('a')
-      anchor.href = `/items/${item.id}`
+      if (item.quantity > 0) {
+        const anchor = document.createElement('a')
+        anchor.href = `/items/${item.id}`
 
-      const heading = document.createElement('h3')
-      heading.textContent = item.title
-      anchor.appendChild(heading)
+        const heading = document.createElement('h3')
+        heading.textContent = item.title
+        anchor.appendChild(heading)
 
-      const image = document.createElement('img')
-      image.src = item.url
-      anchor.appendChild(image)
+        const image = document.createElement('img')
+        image.src = item.url
+        anchor.appendChild(image)
 
-      itemContainer.appendChild(anchor)
+        itemContainer.appendChild(anchor)
 
-      const paragraph = document.createElement('p')
-      paragraph.textContent = `Number of offers:${item.offers}`
-      itemContainer.appendChild(paragraph)
+        const paragraph = document.createElement('p')
+        paragraph.textContent = `Number of offers:${item.offers}`
+        itemContainer.appendChild(paragraph)
+      }
     });
   };
 
@@ -66,8 +68,6 @@
   }
 
   const addItemByDistance = response => {
-    console.log("addItemByDistanceRouteWorking")
-
     for (var i = 0; i < response.length; i++) {
       // if (response[i].id !== response[i].user_id) {
         const heading = document.createElement('h3')
@@ -87,7 +87,6 @@
 
   const getItemsByDistance = () => {
     $.ajax({url: `/api/sort_by_distance/${distanceInput.value}`}).done(response => {
-      console.log(response)
       addItemByDistance(response)
     })
   }
@@ -96,7 +95,6 @@
     event.preventDefault()
     removeAllItems()
     getItemsByDistance()
-    console.log("oh yeah")
   }
 
   myItemsBtn.addEventListener('click', showMyItems)
