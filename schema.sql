@@ -22,7 +22,7 @@ CREATE TABLE items (
     description TEXT,
     latitude float,
     longitude float,
-    quantity INTEGER,
+    quantity numeric,
     unit VARCHAR(50),
     user_id INTEGER,
     created_at TIMESTAMP,
@@ -50,10 +50,10 @@ CREATE TABLE offers (
     id SERIAL PRIMARY KEY,
     proposer_user_id INTEGER,
     proposer_item_id INTEGER,
-    proposer_item_qty INTEGER,
+    proposer_item_qty numeric,
     reviewer_user_id INTEGER,
     reviewer_item_id INTEGER,
-    reviewer_item_qty INTEGER,
+    reviewer_item_qty numeric,
     meeting_point VARCHAR(200),
     meeting_point_suburb VARCHAR(200),
     status_id INTEGER,
@@ -65,3 +65,7 @@ CREATE TABLE offers (
     FOREIGN KEY (reviewer_item_id) REFERENCES items (id) ON DELETE RESTRICT,
     FOREIGN KEY (status_id) REFERENCES offer_statuses (id) ON DELETE RESTRICT
 );
+
+-- ALTER TABLE items ALTER COLUMN quantity TYPE numeric;
+-- ALTER TABLE offers ALTER COLUMN proposer_item_qty TYPE numeric;
+-- ALTER TABLE offers ALTER COLUMN reviewer_item_qty TYPE numeric;
