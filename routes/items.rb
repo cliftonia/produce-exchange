@@ -33,26 +33,27 @@ end
 
 get '/items/:id/edit' do 
   @item = Item.find(params[:id])
-  @photo = Photo.find_by(item_id: params[:id])
+  @photos = @item.photos
   erb :item_edit
 end
 
 put '/items/:id' do
-
+  
   item = Item.find(params[:id])
   item.title = params[:title]
   item.description = params[:description]
   item.quantity = params[:quantity]
-  item.unit = params[:unit]
   item.latitude = current_user.lat
   item.longitude = current_user.lon
-  item.save
+  
+  item.unit = params[:unit]
+  item.save 
 
-  photo = Photo.find_by(item_id: params[:id])
+  # photo = Photo.find_by(item_id: params[:id])
 
-  photo.image_link = params[:image_link]
+  # photo.image_link = params[:image_link]
 
-  photo.save
+  # photo.save
 
   redirect "/items/#{item.id}"
 end

@@ -12,6 +12,7 @@
 
 <h2>Description</h2>
 <p> <%= @item.description %> </p>
+<h3>posted by: <%= @item.user.username %></h3>
 
 <h2>Quantity</h2>
 <p> <%= @item.quantity%> <%= @item.unit%> </p>
@@ -23,7 +24,7 @@
     <button>delete</button>
   </form>
 
-  <a href="/items/<%= @item.id %>/edit">edit picture</a>
+  <a href="/items/<%= @item.id %>/edit">Edit Item</a>
 
 <% end %>
 
