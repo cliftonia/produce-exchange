@@ -8,7 +8,8 @@ class Item < ActiveRecord::Base
     has_many :reviewer_offers, class_name: 'Offer', foreign_key: :reviewer_item_id
     has_many :photos
 
-    # validates :title, presence: true
-    # validates :qty, presence: true
-    # validates :unit, presence: true
+    # validates :image_link, presence: true
+    validates :title, presence: true
+    validates :quantity, presence: true
+    validates :unit, presence: true
 end

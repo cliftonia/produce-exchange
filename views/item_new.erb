@@ -1,5 +1,9 @@
 <h1 class="new-heading">Post Produce</h1>
 
+<% @error_messages.each do |message| %>
+    <p><%= message %></p>
+  <% end %>
+
 <div class="i-uploader">
   <form action="/items" method="post" enctype="multipart/form-data">
     <input class="choose-file" type="file" name="image_link" />
@@ -16,6 +20,9 @@
       <input class="qty-input" type="text" name="quantity">
     </div>
     <select name="unit" id="">
+        <option value="none" selected disabled hidden> 
+            Select a Unit 
+        </option> 
         <option value="kg">kg</option>
         <option value="g">g</option>
         <option value="ltrs">ltrs</option>

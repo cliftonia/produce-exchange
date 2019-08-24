@@ -1,5 +1,8 @@
 <h1 class="edit-heading">Edit Item</h1>
 
+<% @error_messages.each do |message| %>
+    <p><%= message %></p>
+  <% end %>
 <div class="show-img">
 
   <% @photos.each do |photo| %>
@@ -9,6 +12,7 @@
   <% end %>
 
 </div>
+
 
 <div class="i-uploader">
   <form action="/items/<%= @item.id %>" method="post" enctype="multipart/form-data">
