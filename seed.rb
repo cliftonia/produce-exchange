@@ -1,6 +1,7 @@
 require 'carrierwave'
 require 'carrierwave/orm/activerecord'
 require 'fog/aws'
+require 'httparty'
 
 require_relative 'database_config'
 require_relative 'models/item'
@@ -17,11 +18,15 @@ postcodes = [3122, 3121, 3053, 3182, 3066]
 users.each_with_index do |user, index|
   u = User.new
   u.username = user
-  u.email = "#{user}@email.com"
-  u.password = 'abcd'
+  u.email = "#{user}@ga.co"
+  u.password = '' # add password before running
   u.address_line_1 = addresses[index]
   u.suburb = suburbs[index]
   u.postcode = postcodes[index]
+  postcode = "http://v0.postcodeapi.com.au/suburbs/#{postcodes[index]}.json"
+  result = HTTParty.get(postcode)
+  u.lon = result[0]["longitude"]
+  u.lat = result[0]["latitude"]
   u.avatar = 'http://www.carderator.com/assets/avatar_placeholder_small.png'
   u.availability = "mon, tues evenings, and weekends"
   u.save
@@ -35,27 +40,35 @@ statuses.each do |status|
   s.save
 end
 
-items = ['apples', 'potatoes', 'tomatoes', 'peaches', 'lemons']
-units = ['kg', 'g', 'pcs', 'kg', 'pcs']
+# items = ['apples', 'potatoes', 'tomatoes', 'peaches', 'lemons']
+# quantity = [5, 2.5, 500, 6, 4]
+# units = ['pcs', 'kg', 'g', 'pcs', 'pcs']
+# user_ids = [1, 1, 2, 2, 3]
+# latitudes = [145.0333, 145.0333, 145, 145, 144.9681]
+# longitudes = [-37.8333, -37.8333, -37.8333, -37.8333, -37.8004]
 
-items.each_with_index do |item, index|
-  i = Item.new
-  i.title = item
-  i.description = 'I love gummi bears chocolate bar sugar plum. \
-  Pudding danish candy danish sweet roll. Fruitcake biscuit candy. \
-  Tootsie roll chocolate bear claw muffin.'
-  i.quantity = rand(1..10)
-  i.unit = units[index]
-  i.user_id = index + 1
-  i.save
-end
+# items.each_with_index do |item, index|
+#   i = Item.new
+#   i.title = item
+#   i.description = 'I love gummi bears chocolate bar sugar plum. \
+#   Pudding danish candy danish sweet roll. Fruitcake biscuit candy. \
+#   Tootsie roll chocolate bear claw muffin.'
+#   i.latitude = latitudes[index]
+#   i.longitude = longitudes[index]
+#   i.quantity = quantity[index]
+#   i.unit = units[index]
+#   i.user_id = user_ids[index]
+#   i.save
+# end
 
-5.times do |index|
-  p = Photo.new
-  p.item_id = index + 1
-  p.image_link = "https://i.imgur.com/ewAXupq.png"
-  p.save
-end
+# photos = ['apples.jpg', 'potatoes.jpg', 'tomatoes.jpg', 'peaches.jpg', 'lemons.jpg']
+
+# 5.times do |index|
+#   p = Photo.new
+#   p.item_id = index + 1
+#   p.image_link = photos[index]
+#   p.save
+# end
 
 # 4.times do |index|
 #   o = Offer.new
@@ -70,3 +83,5 @@ end
 #   o.meeting_point_suburb = "Richmond"
 #   o.save
 # end
+
+# DROP TABLE items, offer_statuses, offers, photos, users CASCADE;

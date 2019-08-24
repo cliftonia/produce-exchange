@@ -2,9 +2,11 @@ get '/offers/accepted/:id' do
   @offer = Offer.find(params[:id])
   if @offer.proposer_user_id == current_user.id
     @contact_username = @offer.reviewer_user.username
+    @contact_availability = @offer.reviewer_user.availability
     @contact_email = @offer.reviewer_user.email
   else
     @contact_username = @offer.proposer_user.username
+    @contact_availability = @offer.proposer_user.availability
     @contact_email = @offer.proposer_user.email
   end
   erb :offers_accepted_show
