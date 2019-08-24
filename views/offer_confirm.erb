@@ -32,7 +32,9 @@
 
 
 <div class="offer-options">
-  <form action="/offers/accepted">
+  <form action="/offers/<%=@offer.id%>/update" method="post">
+    <input type="hidden" name="_method" value="put">
+    <input type="hidden" name="status" value="accepted">
     <button data-offer-id="<%=@offer.id%>" class="accept offer">ACCEPT</button>
   </form>
   <form action="">

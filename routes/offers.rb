@@ -26,6 +26,7 @@ end
 
 get '/offers' do
   @offers = Offer.all
+  # only show offers with status is pending
   @proposer_offers = Offer.where(proposer_user_id: current_user.id)
   @reviewer_offers = Offer.where(reviewer_user_id: current_user.id)
   erb :offer_review
@@ -50,13 +51,15 @@ get '/offers/:item_id' do
   erb :offer_new
 end
 
+
+
 put '/offers/:id' do
   edit = Offer.find(params[:id])
   edit.proposer_item_qty = params[:quantity]
   if edit.save
     redirect "/offers"
   else
-    'not saved'
+    binding.pry
   end
 end
 
@@ -77,7 +80,7 @@ post '/offers/new' do
     o.meeting_point = params[:elsewhere]
   elsif params[:meeting_point] == 'yours'
     o.meeting_point_suburb = current_user.address_line_1
-    o.meeting_point_suburb = current_user.suburb#{current_user.suburb}"
+    o.meeting_point_suburb = current_user.suburb
   elsif params[:meeting_point] == 'theirs'
     o.meeting_point = User.find(o.reviewer_user_id).address_line_1
     o.meeting_point_suburb = User.find(o.reviewer_user_id).suburb
@@ -85,7 +88,6 @@ post '/offers/new' do
   o.status_id = 1
   o.save
   redirect "/offers"
-  # redirect to a transactions page
 end
 
 get '/offer/:id' do
@@ -96,25 +98,28 @@ get '/offer/:id' do
   erb :offer_confirm
 end
 
-post '/api/offer_status' do
-  content_type :json
-  offer = Offer.find(params[:offer_id])
-  offer_status = OfferStatus.find(offer.status_id)
-  prop_item = Item.find(offer.proposer_item_id)
-  rev_item = Item.find(offer.reviewer_item_id)
-  if params[:class_name].include? 'accept'
-    offer.status_id = 3
-    prop_item.quantity = offer.proposer_item.quantity - offer.proposer_item_qty
-    rev_item.quantity = offer.reviewer_item.quantity - offer.reviewer_item_qty
-    prop_item.save
-    rev_item.save
-  elsif params[:class_name].include? 'decline'
-    offer.status_id = 2
-    Offer.delete(offer.id)
-  end
-  if offer.save
-    { message: 'Record saved!',
-      offer_status: OfferStatus.find(offer.status_id).stage
-    }.to_json
+put '/offers/:id/update' do
+  offer = Offer.find(params[:id])
+  status = params[:status]
+  proposer_item = offer.proposer_item
+  reviewer_item = offer.reviewer_item
+  prop_total = offer.proposer_item.quantity - offer.proposer_item_qty
+  rev_total = offer.reviewer_item.quantity - offer.reviewer_item_qty
+  if prop_total > 0 || rev_total > 0
+    if params[:status] == 'accepted'
+      offer.status_id = 3
+      proposer_item.quantity = prop_total
+      reviewer_item.quantity = rev_total
+      proposer_item.save
+      reviewer_item.save
+    elsif params[:status] == 'declined'
+      offer.status_id = 2
+      Offer.delete(offer.id)
+    end
+    offer.save
+    redirect '/offers'
+  else
+    @error_messages = "You don't have enough in your inventory"
+    erb :offer_review
   end
 end

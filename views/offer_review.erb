@@ -7,6 +7,8 @@
   </select>
 </section>
 
+<p><%= @error_messages%></p>
+
 <section class="proposer-offers">
   <% @proposer_offers.each do |offer| %>
   <a href="/offer/<%=offer.id%>">
