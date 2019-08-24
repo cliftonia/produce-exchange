@@ -10,6 +10,13 @@ get '/offers' do
   erb :offer_review
 end
 
+get '/api/offers' do
+  content_type :json
+  @offers = Offer.all
+  @proposer_offers = Offer.where(proposer_user_id: current_user.id)
+  {offers: @proposer_offers}.to_json
+end
+
 get '/offers/:id/edit' do
   @offer = Offer.find(params[:id])
   erb :offer_edit
@@ -72,15 +79,21 @@ post '/api/offer_status' do
   content_type :json
   offer = Offer.find(params[:offer_id])
   offer_status = OfferStatus.find(offer.status_id)
+  prop_item = Item.find(offer.proposer_item_id)
+  rev_item = Item.find(offer.reviewer_item_id)
   if params[:class_name].include? 'accept'
     offer.status_id = 3
+    prop_item.quantity = offer.proposer_item.quantity - offer.proposer_item_qty
+    rev_item.quantity = offer.reviewer_item.quantity - offer.reviewer_item_qty
+    prop_item.save
+    rev_item.save
   elsif params[:class_name].include? 'decline'
     offer.status_id = 2
+    Offer.delete(offer.id)
   end
   if offer.save
     { message: 'Record saved!',
-      offer_status: OfferStatus.find(offer.status_id).stage,
+      offer_status: OfferStatus.find(offer.status_id).stage
     }.to_json
   end
-
 end

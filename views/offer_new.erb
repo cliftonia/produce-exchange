@@ -1,39 +1,60 @@
 <h1>make offer form</h1>
-<%=@reviewer_item.title%>
-<%=@reviewer_item.quantity%>
-<%=@reviewer_item.unit%>
-<%@photos.each do |photo|%>
-  <img src="<%=photo.image_link%>" alt="">
-<% end %>
+<section class="on-offer">
+  <p><%=@reviewer_item.title%> <%=@reviewer_item.quantity%><%=@reviewer_item.unit%></p>
+  <%@photos.each do |photo|%>
+    <img src="<%=photo.image_link%>" alt="">
+  <% end %>
+</section>
 
-<% @proposed_items.each do |item| %>
-  <p><%=item.quantity%> <%=item.unit%> <%=item.title%></p>
-<% end %>
-
-<form action="/offers/new" method="post">
-  <label for="">your items</label>
-    <select name="item_id" id="">
-      <% @proposed_items.each do |item| %>
-        <option name="item_id" value="<%=item.id%>"><%=item.title%></option>
-      <% end %>
+<section class="your-offers">
+  <% @proposed_items.each do |item| %>
+    <p><%=item.quantity%> <%=item.unit%> <%=item.title%></p>
+  <% end %>
+</section>
+<section class="make-offer-form">
+  <form action="/offers/new" method="post">
+    <label for="">your items</label>
+      <select name="item_id" id="" class="">
+        <% @proposed_items.each do |item| %>
+          <option name="item_id" value="<%=item.id%>"><%=item.title%></option>
+        <% end %>
+      </select>
+    <input type="text" name="qty" placeholder="quantity">
+    <select name="unit" id="">
+      <option value="kg">kg</option>
+      <option value="g">g</option>
+      <option value="pcs">pcs</option>
     </select>
-  <input type="number" name="qty" placeholder="quantity" min=1 max="">
-  <select name="unit" id="">
-    <option value="kg">kg</option>
-    <option value="g">g</option>
-    <option value="pcs">pcs</option>
-  </select>
-  <label for="meeting_point">Meeting point</label>
-  <select name="meeting_point" id="">
-    <option value="yours">your location</option>
-    <option value="theirs">their location</option>
-    <option value="elsewhere">elsewhere</option>
-  </select>
+    <label for="meeting_point">Meeting point</label>
+    <select name="meeting_point" id="">
+      <option value="yours">your location</option>
+      <option value="theirs">their location</option>
+      <option value="elsewhere">elsewhere</option>
+    </select>
     <input type="text" name="elsewhere" placeholder="Suggest elsewhere">
-  <input type="hidden" name="reviewer_item_id" value="<%=@reviewer_item.id%>">
-  <button>make offer</button>
-</form>
+    <input type="hidden" name="reviewer_item_id" value="<%=@reviewer_item.id%>">
+    <button>make offer</button>
+  </form>
 
-<form action="items/new">
-  <button>Add item</button>
-</form>
+  <form action="items/new">
+    <button>Add item</button>
+  </form>
+</section>
+
+<script>
+
+var makeOfferForm = document.querySelector('.make-offer-form')
+var handleClick = event => {
+  console.log(event.target)
+
+  var options = {
+    url: '/api/offers',
+  }
+  var handleDone = function(resp) {
+    console.log(resp)
+  }
+  $.ajax(options).done(handleDone)
+}
+makeOfferForm.addEventListener('click', handleClick)
+
+</script>

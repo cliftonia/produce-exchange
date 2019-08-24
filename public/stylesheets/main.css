@@ -1,6 +1,6 @@
 :root {
   --text: #666666;
-  
+
   --main: #f68787;
   --secondary: #ffba92;
   --tertiary: #e0f5b9;
@@ -15,3 +15,8 @@
 img {
   width: 300px;
 }
+
+.hide {
+  display: none;
+}
+
