@@ -1,3 +1,5 @@
+<h1 class="itm-shw-heading"><%= @item.title %> </h1>
+
 <div class="show-img">
 
   <% @photos.each do |photo| %>
@@ -9,8 +11,6 @@
 </div>
 
 <div class="info-box">
-
-  <h1 class="itm-shw-heading"><%= @item.title %> </h1>
 
   <h4>Description:</h4>
   <p> <%= @item.description %> </p>
