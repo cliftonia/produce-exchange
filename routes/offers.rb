@@ -57,8 +57,6 @@ put '/offers/:id' do
   edit.proposer_item_qty = params[:quantity]
   if edit.save
     redirect "/offers"
-  else
-    # binding.pry
   end
 end
 
