@@ -11,3 +11,4 @@ gem 'fog-aws', group: :production
 gem 'fog'
 gem 'httparty'
 gem 'geocoder'
+gem 'bcrypt'
