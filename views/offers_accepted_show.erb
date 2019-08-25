@@ -1,17 +1,19 @@
 <h3>Accepted Offer</h3>
 
-<div class="offer-card">
+<div class="offer-card card">
   <p>Transaction between: <%= @offer.proposer_item.user.username %> and <%= @offer.reviewer_item.user.username %> on <%= @offer.created_at.strftime("%a, %e %b %Y") %></p>
   <p><%= @offer.proposer_item_qty %><%= @offer.proposer_item.unit %>  <%= @offer.proposer_item.title %> for <%= @offer.reviewer_item_qty %><%= @offer.reviewer_item.unit %>  <%= @offer.reviewer_item.title %></p>
   <div class="card-imgs">
     <img src="<%= @offer.proposer_item.photos.first.image_link %>" alt="">
     <img src="<%= @offer.reviewer_item.photos.first.image_link %>" alt="">
   </div>
-  <p>Meeing point: <%= @offer.meeting_point_suburb %></p>
-  <p>Preferred time for <%= @contact_username %>: <%= @contact_availability %></p>
-  <p>Contact details: <%= @contact_email %></p>
+  <div class="offer-card">
+    <p>Meeing point: <%= @offer.meeting_point_suburb %></p>
+    <p>Preferred time for <%= @contact_username %>: <%= @contact_availability %></p>
+    <p>Contact details: <%= @contact_email %></p>
+  </div>
   <form action="/offers/complete/<%= @offer.id %>" method="post">
     <input type="hidden" name="_method" value="put">
-    <button class="u-full-width">Mark as complete</button>
+    <button>Mark as complete</button>
   </form>
 </div>

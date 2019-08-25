@@ -12,12 +12,12 @@
 
   <section class="items">
     <% @items.each do |item| %>
-    <div class="item-card">
+    <div class="offer-card card">
       <a href="/items/<%= item.id %>">
         <h3><%= item.title %></h3>
-        <img src="<%= item.photos.first.image_link %>" alt="">
+        <img src="<%= item.photos.first.image_link %>" class="large">
       </a>
-      <p>Number of offers: <%= item.reviewer_offers.length %></p>
+      <p class="align-left">Number of offers: <%= item.reviewer_offers.length %></p>
     </div>
     <% end %>
   </section>
@@ -39,8 +39,9 @@
     response.forEach(item => {
       if (item.quantity > 0) {
         const div = document.createElement('div')
-        div.classList.add('item-card')
-        
+        div.classList.add('offer-card')
+        div.classList.add('card')
+
         const anchor = document.createElement('a')
         anchor.href = `/items/${item.id}`
 
@@ -50,6 +51,7 @@
 
         const image = document.createElement('img')
         image.src = item.url
+        image.classList.add('large')
         anchor.appendChild(image)
 
         div.appendChild(anchor)
@@ -57,7 +59,7 @@
         const paragraph = document.createElement('p')
         paragraph.textContent = `Number of offers:${item.offers}`
         div.appendChild(paragraph)
-        
+
         itemContainer.appendChild(div)
       }
     });
@@ -77,17 +79,19 @@
   const addItemByDistance = response => {
       response.forEach(item => {
         const div = document.createElement('div')
-        div.classList.add('item-card')
-        
+        div.classList.add('offer-card')
+        div.classList.add('card')
+
         const anchor = document.createElement('a')
         anchor.href = `/items/${item.id}`
-        
+
         const heading = document.createElement('h3')
         heading.textContent = item.title
         anchor.appendChild(heading)
 
         const image = document.createElement('img')
         image.src = item.photos[0].image_link.url
+        image.classList.add('large')
         anchor.appendChild(image)
 
         const distance = document.createElement('p')

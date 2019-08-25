@@ -7,12 +7,15 @@
   </select>
 </section>
 
+
+
+
 <p><%= @error_messages%></p>
 
 <section class="proposer-offers">
   <% @proposer_offers.each do |offer| %>
   <a href="/offer/<%=offer.id%>">
-    <div class="offer-card card">
+    <div class="offer-card card secondary">
       <div class="card-img">
         <img src="<%=offer.reviewer_item.photos.first.image_link%>" alt="">
         <img src="<%=offer.proposer_item.photos.first.image_link%>" alt="">
@@ -29,7 +32,7 @@
 <section class="reviewer-offers">
   <% @reviewer_offers.each do |offer| %>
     <a href="/offer/<%=offer.id%>">
-      <div class="offer-card card">
+      <div class="offer-card card tertiary">
         <div class="card-img">
           <img src="<%=offer.proposer_item.photos.first.image_link%>" alt="">
           <img src="<%=offer.reviewer_item.photos.first.image_link%>" alt="">
@@ -40,6 +43,9 @@
   <% end %>
 </section>
 
+<form action="/offers/accepted">
+  <button>ACCEPTED OFFERS</button>
+</form>
 
 <script>
   var filterDropdown = document.querySelector('.filter-offer')
