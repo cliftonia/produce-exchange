@@ -110,7 +110,7 @@ put '/offers/:id/update' do
       proposer_item.save
       reviewer_item.save
       offer.save
-      redirect '/offers'
+      redirect '/offers/accepted'
     end
   else
     @offers = Offer.all
