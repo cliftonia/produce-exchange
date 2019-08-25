@@ -68,21 +68,24 @@
   }
 
   const addItemByDistance = response => {
-    for (var i = 0; i < response.length; i++) {
-      // if (response[i].id !== response[i].user_id) {
+      response.forEach(item => {
+        const anchor = document.createElement('a')
+        anchor.href = `/items/${item.id}`
+        
         const heading = document.createElement('h3')
-        heading.textContent = response[i].title
-        itemContainer.appendChild(heading)
+        heading.textContent = item.title
+        anchor.appendChild(heading)
 
         const distance = document.createElement('p')
-        distance.textContent = Math.round(response[i].distance) + "KM"
-        itemContainer.appendChild(distance)
+        distance.textContent = Math.round(item.distance) + "KM"
+        anchor.appendChild(distance)
 
         const image = document.createElement('img')
-        image.src = response[i].photos[0].image_link.url
-        itemContainer.appendChild(image)
-      // }
-    }
+        image.src = item.photos[0].image_link.url
+        anchor.appendChild(image)
+
+        itemContainer.appendChild(anchor)
+      })
   };
 
   const getItemsByDistance = () => {
