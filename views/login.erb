@@ -4,13 +4,15 @@
   <p><%= @message %></p>
 
   <form action="/sessions" method="post">
-    <input type="email" placeholder="Email" name="email">
-    <input type="password" placeholder="Password" name="password">
-    <button>Sign in</button>
+    <input class="u-full-width" type="email" placeholder="Email" name="email">
+    <input class="u-full-width" type="password" placeholder="Password" name="password">
+    <button class="u-full-width">Sign in</button>
   </form>
 
   <section>
     <p>Not a member yet?</p>
-    <a href="/users/new">Create an account</a>
+    <form action="/users/new">
+      <button>Create an account</button>
+    </form>
   </section>
 </main>
