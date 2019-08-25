@@ -44,7 +44,7 @@ get '/offers/:id/edit' do
 end
 
 get '/offers/:item_id' do
-  @proposed_items = Item.where(user_id: current_user.id)
+  @proposed_items = Item.where(user_id: current_user.id).where.not(quantity: 0)
   @reviewer_item = Item.find(params[:item_id])
   @photos = Photo.where(item_id: params[:item_id])
   erb :offer_new
