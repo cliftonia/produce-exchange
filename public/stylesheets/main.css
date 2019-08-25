@@ -217,6 +217,9 @@ p {
 .make-offer-form {
   padding: 1rem;
 }
+.make-offer-form form {
+  width: 100%;
+}
 
 .your-offers {
   padding: 1rem;
@@ -290,7 +293,6 @@ p {
   margin: 1rem auto;
   padding: 1rem;
 }
-
 
 .meeting-card p {
   padding: 1rem;
