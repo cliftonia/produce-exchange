@@ -2,21 +2,23 @@
   <section class=filters>
     <% if logged_in? %>
       <button class="my-items-btn u-full-width">My Items</button>
-      <form action="">
-        <label for="">Sort by Distance</label>
-        <input class="distance-input six columns" type="text" placeholder="Kilometres">
-        <button class="distance-btn six columns">Filter</button>
+      <form class="distance-form" action="">
+        <label>Sort by Distance</label>
+        <input class="distance-input u-full-width" type="text" placeholder="Kilometres">
+        <button class="distance-btn u-full-width">Filter</button>
       </form>
     <% end %>
   </section>
 
   <section class="items">
     <% @items.each do |item| %>
+    <div class="item-card">
       <a href="/items/<%= item.id %>">
         <h3><%= item.title %></h3>
         <img src="<%= item.photos.first.image_link %>" alt="">
       </a>
       <p>Number of offers: <%= item.reviewer_offers.length %></p>
+    </div>
     <% end %>
   </section>
 </main>
@@ -36,6 +38,9 @@
   const addItemsToDom = response => {
     response.forEach(item => {
       if (item.quantity > 0) {
+        const div = document.createElement('div')
+        div.classList.add('item-card')
+        
         const anchor = document.createElement('a')
         anchor.href = `/items/${item.id}`
 
@@ -47,11 +52,13 @@
         image.src = item.url
         anchor.appendChild(image)
 
-        itemContainer.appendChild(anchor)
+        div.appendChild(anchor)
 
         const paragraph = document.createElement('p')
         paragraph.textContent = `Number of offers:${item.offers}`
-        itemContainer.appendChild(paragraph)
+        div.appendChild(paragraph)
+        
+        itemContainer.appendChild(div)
       }
     });
   };
@@ -69,6 +76,9 @@
 
   const addItemByDistance = response => {
       response.forEach(item => {
+        const div = document.createElement('div')
+        div.classList.add('item-card')
+        
         const anchor = document.createElement('a')
         anchor.href = `/items/${item.id}`
         
@@ -76,15 +86,16 @@
         heading.textContent = item.title
         anchor.appendChild(heading)
 
-        const distance = document.createElement('p')
-        distance.textContent = Math.round(item.distance) + "KM"
-        anchor.appendChild(distance)
-
         const image = document.createElement('img')
         image.src = item.photos[0].image_link.url
         anchor.appendChild(image)
 
-        itemContainer.appendChild(anchor)
+        const distance = document.createElement('p')
+        distance.textContent = Math.round(item.distance) + "km away"
+        anchor.appendChild(distance)
+
+        div.appendChild(anchor)
+        itemContainer.appendChild(div)
       })
   };
 

@@ -9,18 +9,20 @@
 
   <form action="/users/<%= current_user.id %>" method="post">
     <input type="hidden" name="_method" value="put">
-    <input type="email" placeholder="Email*" name="email" value="<%= current_user.email %>">
-    <input type="text" placeholder="Username*" name="username" value="<%= current_user.username %>">
-    <input type="text" placeholder="Address Line 1" name="address_line_1" value="<%= current_user.address_line_1 %>">
-    <input type="text" placeholder="Suburb" name="suburb" value="<%= current_user.suburb %>">
-    <input type="text" placeholder="Postcode*" name="postcode" value="<%= current_user.postcode %>">
-    <input type="text" placeholder="Availability" name="availability" value="<%= current_user.availability %>">
+    <input class="u-full-width" type="email" placeholder="Email*" name="email" value="<%= current_user.email %>">
+    <input class="u-full-width" type="text" placeholder="Username*" name="username" value="<%= current_user.username %>">
+    <input class="u-full-width" type="text" placeholder="Address Line 1" name="address_line_1" value="<%= current_user.address_line_1 %>">
+    <input class="u-full-width" type="text" placeholder="Suburb" name="suburb" value="<%= current_user.suburb %>">
+    <input class="u-full-width" type="text" placeholder="Postcode*" name="postcode" value="<%= current_user.postcode %>">
+    <input class="u-full-width" type="text" placeholder="Availability" name="availability" value="<%= current_user.availability %>">
     <label>Confirm password to apply changes</label>
-    <input type="password" placeholder="Current password" name="password">
-    <button>Update</button>
+    <input class="u-full-width" type="password" placeholder="Current password" name="password">
+    <button class="u-full-width">Update</button>
   </form>
 
-  <a href="/users/<%= current_user.id %>/edit_password">Change password</a>
+  <form action="/users/<%= current_user.id %>/edit_password">
+    <button>Change Password</button>
+  </form>
   
   <form action="/sessions" method="post">
     <input type="hidden" name="_method" value="delete">
