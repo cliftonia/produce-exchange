@@ -57,8 +57,6 @@ put '/offers/:id' do
   edit.proposer_item_qty = params[:quantity]
   if edit.save
     redirect "/offers"
-  else
-    # binding.pry
   end
 end
 
@@ -110,7 +108,7 @@ put '/offers/:id/update' do
       proposer_item.save
       reviewer_item.save
       offer.save
-      redirect '/offers'
+      redirect '/offers/accepted'
     end
   else
     @offers = Offer.all

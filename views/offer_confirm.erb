@@ -12,11 +12,9 @@
   <% else %>
     <h2>Their item</h2>
   <% end %>
-    <a href="/items/<%=@offer.proposer_item_id%>"><img src="<%=@offer.proposer_item.photos.first.image_link%>" alt=""></a>
-    <p><%=@offer.proposer_item.title%></p>
-    <p><%=@offer.proposer_item_qty%><%=@offer.proposer_item.unit%></p>
+    <a href="/items/<%=@offer.proposer_item_id%>"><img src="<%=@offer.proposer_item.photos.first.image_link%>" class="offer-img"></a>
+    <p><%=@offer.proposer_item_qty%><%=@offer.proposer_item.unit%> <%=@offer.proposer_item.title%></p>
     <p><%=@offer.proposer_item.user.username%></p>
-
   </section>
 
   <section class="review-item card">
@@ -25,9 +23,8 @@
   <% else %>
     <h2>Their item</h2>
   <% end %>
-    <a href="/items/<%=@offer.reviewer_item_id%>"><img src="<%=@offer.reviewer_item.photos.first.image_link%>" alt=""></a>
-    <p><%=@offer.reviewer_item.title%></p>
-    <p><%=@offer.reviewer_item_qty%><%=@offer.reviewer_item.unit%></p>
+    <a href="/items/<%=@offer.reviewer_item_id%>"><img src="<%=@offer.reviewer_item.photos.first.image_link%>" class="offer-img"></a>
+    <p><%=@offer.reviewer_item_qty%><%=@offer.reviewer_item.unit%> <%=@offer.reviewer_item.title%></p>
     <p><%=@offer.reviewer_item.user.username%></p>
   </section>
 </div>

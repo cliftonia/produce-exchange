@@ -81,6 +81,9 @@ p {
   margin: 1.5rem auto;
   object-fit: contain;
 }
+.offer-img {
+
+}
 
 .main-header {
   background-color: var(--tertiary);
@@ -167,16 +170,13 @@ p {
   height: 38px;
   color: var(--text);
   text-align: center;
-  font-size: 11px;
   font-weight: 600;
-  line-height: 38px;
   letter-spacing: .1rem;
   text-transform: uppercase;
   text-decoration: none;
   white-space: nowrap;
   background-color: var(--quarternary);
   border-radius: 4px;
-  border: 1px solid #bbb;
   cursor: pointer;
   box-sizing: border-box;
 }
@@ -209,16 +209,22 @@ p {
   text-indent: 1rem;
   box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
   margin: 1rem;
+  display: flex;
   /* padding: 1rem; */
-  /* justify-content: center; */
+  justify-content: center;
 }
 
 .make-offer-form {
   padding: 1rem;
 }
+.make-offer-form form {
+  width: 100%;
+}
 
 .your-offers {
   padding: 1rem;
+  display: flex;
+  flex-direction: column;
 }
 
 .card p {
@@ -232,6 +238,7 @@ p {
   text-align: center;
 }
 
+
 .confirm-container {
   display: flex;
   flex-direction: row;
@@ -239,6 +246,17 @@ p {
 
 .offer-card {
   background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.offer-card img {
+  width: 46%;
+  margin: 2rem auto;
+}
+
+.edit-offer {
+  margin: 0 auto;
 }
 
 .statement {
@@ -266,12 +284,17 @@ p {
 .proposer-item img, .review-item img {
   width: 70%;
   margin: 0 auto;
+  display: block;
 }
 
-.on-offer img {
-  width: 70%;
+.offer-card .large {
+  width: 90%;
   display: block;
   margin: 1rem auto;
+  padding: 1rem;
+}
+
+.meeting-card p {
   padding: 1rem;
 }
 
@@ -281,8 +304,8 @@ p {
 }
 .qty-box input {
   width: 90%;
-  padding
 }
+
 .qty-box label {
   text-align: left;
   margin-left: 0.5em;
@@ -290,6 +313,7 @@ p {
 
 .make-add-buttons {
   display: flex;
+  flex-direction: column;
   justify-content: space-evenly;
 }
 

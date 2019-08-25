@@ -1,7 +1,7 @@
 <h1>MAKE AN OFFER</h1>
-<section class="on-offer card">
+<section class="offer-card card">
   <%@photos.each do |photo|%>
-    <img src="<%=photo.image_link%>" alt="">
+    <img src="<%=photo.image_link%>" class="large">
   <% end %>
   <h4 class="offer-statment"><%=@reviewer_item.user.username%>  has <%=@reviewer_item.quantity%><%=@reviewer_item.unit%> <%=@reviewer_item.title%></h4>
 </section>
@@ -15,14 +15,14 @@
 <section class="make-offer-form card">
   <form action="/offers/new" method="post">
     <label for="">What would you like to offer</label>
-      <select name="item_id" id="" class="select-item u-full-width">
-        <option value="" disabled selected>Choose from your list</option>
-        <% @proposed_items.each do |item| %>
-          <option name="item_id" value="<%=item.id%>"><%=item.title%></option>
-        <% end %>
-      </select>
+    <select name="item_id" id="" class="select-item u-full-width" required>
+      <option value="" disabled selected >Choose from your list</option>
+      <% @proposed_items.each do |item| %>
+        <option name="item_id" value="<%=item.id%>"><%=item.title%></option>
+      <% end %>
+    </select>
     <div class="qty-box">
-      <input class="offer-qty" type="number" step=".01" min=0 name="qty" placeholder="quantity">
+      <input class="offer-qty" type="number" step=".01" min=0 name="qty" placeholder="quantity" required>
       <p class="offer-unit">unit</p>
     </div>
 
