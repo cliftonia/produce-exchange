@@ -7,6 +7,9 @@
   </select>
 </section>
 
+
+
+
 <p><%= @error_messages%></p>
 
 <section class="proposer-offers">
@@ -40,6 +43,9 @@
   <% end %>
 </section>
 
+<form action="/offers/accepted">
+  <button>ACCEPTED OFFERS</button>
+</form>
 
 <script>
   var filterDropdown = document.querySelector('.filter-offer')
