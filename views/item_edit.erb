@@ -1,4 +1,4 @@
-<h1 class="edit-heading">Edit Item</h1>
+<h1 class="edit-heading">Edit Produce</h1>
 
 <% @error_messages.each do |message| %>
     <p><%= message %></p>
@@ -19,22 +19,22 @@
   <input type="hidden" name="_method" value="put">
     
     <div class="new-title">
-      <label for="">Title?</label>
+      <label for="">Title:</label>
       <input class="u-full-width" type="text" name="title" value="<%= @item.title%>">
     </div>
 
     <div class="new-description">
-      <label for="">Description</label>
+      <label for="">Description:</label>
       <input class="u-full-width" type="text" name="description" value="<%= @item.description%>">
     </div>
 
     <div class="new-qty">
-      <label for="">Qty</label>
+      <label for="">Qty:</label>
       <input class="qty-input" type="text" name="quantity" value="<%= @item.quantity%>">
     </div>
 
     <div class="new-unit">
-      <label for="">Unit</label>
+      <label for="">Unit:</label>
       <select name="unit" id="">
         <option value="none" selected disabled hidden> 
             Select a Unit 

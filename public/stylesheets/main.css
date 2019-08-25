@@ -113,12 +113,12 @@ p {
 }
 
 .info-box {
-  border: 1px solid black;
   margin: 1em;
-  padding-top: 2.5rem;
-  padding-left: 2.5rem;
-  padding-right: 2.5rem;
+  padding: 2.5rem;
   text-align: left;
+  border-radius: 2rem;
+  background-color: white;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
 }
 
 .show-img {
@@ -133,11 +133,13 @@ p {
 
 .itm-shw-heading {
   text-align: center;
+  margin-top: 2.5rem;
 }
 
 /* Item_Edit Page */
 
-.edit-heading {
+.edit-heading,
+.new-heading {
   margin-top: 1rem;
 }
 
@@ -146,7 +148,6 @@ p {
 .choose-file {
   display: inline-block;
   height: 38px;
-  /* padding: 0 30px; */
   color: var(--text);
   text-align: center;
   font-size: 11px;
