@@ -20,9 +20,9 @@
     <h2>Their item</h2>
   <% end %>
     <img src="<%=@offer.reviewer_item.photos.first.image_link%>" alt="">
-    <%=@offer.reviewer_item.title%>
-    <%=@offer.reviewer_item_qty%><%=@offer.reviewer_item.unit%>
-    <%=@offer.reviewer_item.user.username%>
+    <p><%=@offer.reviewer_item.title%></p>
+    <p><%=@offer.reviewer_item_qty%><%=@offer.reviewer_item.unit%></p>
+    <p><%=@offer.reviewer_item.user.username%></p>
   </section>
 </div>
 

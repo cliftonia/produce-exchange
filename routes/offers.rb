@@ -26,9 +26,8 @@ end
 
 get '/offers' do
   @offers = Offer.all
-  # only show offers with status is pending
-  @proposer_offers = Offer.where(proposer_user_id: current_user.id)
-  @reviewer_offers = Offer.where(reviewer_user_id: current_user.id)
+  @proposer_offers = Offer.where( {proposer_user_id: current_user.id, status_id: 1})
+  @reviewer_offers = Offer.where( {proposer_user_id: current_user.id, status_id: 1})
   erb :offer_review
 end
 
