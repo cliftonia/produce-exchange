@@ -4,7 +4,7 @@ A web based CRUD application to list and trade your surplus produce.
 
 ## Wireframes
 
-![Wireframes](https://github.com/cliftonia/produce-exchange/wireframes.jpg "Wireframes")
+![Wireframes](https://raw.githubusercontent.com/cliftonia/produce-exchange/master/wireframes.jpg "Wireframes")
 
 ## Technologies
 
@@ -38,7 +38,7 @@ A web based CRUD application to list and trade your surplus produce.
 
 ## Entity Relationship Diagram
 
-![ER Diagram](https://github.com/cliftonia/produce-exchange/er_diagram.png "ER Diagram")
+![ER Diagram](https://raw.githubusercontent.com/cliftonia/produce-exchange/master/er_diagram.png "ER Diagram")
 
 ## Installation
 
