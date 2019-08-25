@@ -3,17 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hello World</title>
+  <title>Produce Exchange</title>
   <link rel="stylesheet" href="/stylesheets/normalize.css">
   <link rel="stylesheet" href="/stylesheets/skeleton.css">
   <link rel='stylesheet' href='/stylesheets/main.css'>
+  <script src="https://kit.fontawesome.com/e0410cd50a.js"></script>
 </head>
 <body>
   <header class="main-header">
     <% if logged_in? %>
-      <p>logged in as: <%= current_user.username %></p>
+      <p class="logged-in">logged in as: <%= current_user.username %></p>
     <% else %>
-      <a href="/sessions/new">Login</a>
+      <a href="/sessions/new"><i class="fas fa-sign-in-alt fa-2x"></i></a>
     <% end %>
   </header>
 
@@ -23,10 +24,10 @@
   </div>
   <footer>
     <nav>
-      <a href="/items/new">Add new item</a>
-      <a href="/offers">Offers</a>
-      <a href="/users/:id">Account</a>
-      <a href="/">Home</a>
+      <a href="/items/new"><i class="fas fa-plus-square fa-2x"></i></a>
+      <a href="/offers"><i class="fas fa-exchange-alt fa-2x"></i></a>
+      <a href="/users/:id"><i class="fas fa-user fa-2x"></i></a>
+      <a href="/"><i class="fas fa-home fa-2x"></i></a>
     </nav>
   </footer>
     <script
