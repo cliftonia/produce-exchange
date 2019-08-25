@@ -1,6 +1,11 @@
 <h2>Confirm Offer</h2>
 
 <div class="confirm-conatiner">
+  <% if @offer.proposer_user_id === current_user.id%>
+    <form action="/offers/<%=@offer.id%>/edit" class="edit-offer u-full-width">
+      <button>EDIT OFFER</button>
+    </form>
+  <% end %>
   <section class="proposer-item card">
   <% if @offer.proposer_user_id === current_user.id%>
     <h2>Your item</h2>
@@ -11,6 +16,7 @@
     <p><%=@offer.proposer_item.title%></p>
     <p><%=@offer.proposer_item_qty%><%=@offer.proposer_item.unit%></p>
     <p><%=@offer.proposer_item.user.username%></p>
+
   </section>
 
   <section class="review-item card">
@@ -35,40 +41,11 @@
     <form action="/offers/<%=@offer.id%>/update" method="post">
       <input type="hidden" name="_method" value="put">
       <input type="hidden" name="status" value="accepted">
-      <button data-offer-id="<%=@offer.id%>" class="accept offer">ACCEPT</button>
+      <button class="accept offer">ACCEPT</button>
     </form>
-    <form action="">
-      <button data-offer-id="<%=@offer.id%>" class="decline offer">DECLINE</button>
+    <form action="/offers/<%=@offer.id%>" method="post">
+       <input type="hidden" name="_method" value="delete">
+      <button class="decline offer">DECLINE</button>
     </form>
   </div>
 <% end %>
-
-<script src="https://code.jquery.com/jquery-3.4.1.js"
-  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-  crossorigin="anonymous">
-</script>
-<script>
-var offerOptions = document.querySelector('.offer-options')
-var offerAlert = document.querySelector('.offer-alert')
-var offerStatus = document.querySelector('.offer-status')
-var yourItemHeading = document.querySelector('.proposer-item h2')
-
-var chooseOfferOption = event => {
-  offerStatus.textContent = ''
-  var options = {
-    method: 'post',
-    url: '/api/offer_status',
-    data: { offer_id: event.target.getAttribute('data-offer-id'),
-    class_name: event.target.className }
-  }
-
-  var updateOfferStatus = resp => {
-    offerStatus.textContent = resp.offer_status
-  }
-
-  $.ajax(options).done(updateOfferStatus)
-}
-
-offerOptions.addEventListener('click', chooseOfferOption)
-
-</script>

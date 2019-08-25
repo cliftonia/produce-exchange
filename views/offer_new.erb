@@ -1,43 +1,47 @@
-<h1>make offer form</h1>
-<section class="on-offer">
-  <p><%=@reviewer_item.title%> <%=@reviewer_item.quantity%><%=@reviewer_item.unit%></p>
+<h1>MAKE AN OFFER</h1>
+<section class="on-offer card">
   <%@photos.each do |photo|%>
     <img src="<%=photo.image_link%>" alt="">
   <% end %>
+  <h4 class="offer-statment"><%=@reviewer_item.user.username%>  has <%=@reviewer_item.quantity%><%=@reviewer_item.unit%> <%=@reviewer_item.title%></h4>
 </section>
 
-<section class="your-offers">
+<section class="your-offers card ">
+  <label for="your-offers">These are your items</label>
   <% @proposed_items.each do |item| %>
     <p><%=item.quantity%> <%=item.unit%> <%=item.title%></p>
   <% end %>
 </section>
-<section class="make-offer-form">
+<section class="make-offer-form card">
   <form action="/offers/new" method="post">
-    <label for="">your items</label>
-      <select name="item_id" id="" class="select-item">
+    <label for="">What would you like to offer</label>
+      <select name="item_id" id="" class="select-item u-full-width">
         <option value="" disabled selected>Choose from your list</option>
         <% @proposed_items.each do |item| %>
           <option name="item_id" value="<%=item.id%>"><%=item.title%></option>
         <% end %>
       </select>
-
-    <input class="offer-qty" type="number" step=".01" name="qty" placeholder="quantity">
-    <label class="offer-unit">unit</label>
+    <div class="qty-box">
+      <input class="offer-qty" type="number" step=".01" min=0 name="qty" placeholder="quantity">
+      <p class="offer-unit">unit</p>
+    </div>
 
     <label for="meeting_point">Meeting point</label>
-    <select name="meeting_point" id="" class="meeting-point">
+    <select name="meeting_point" id="" class="meeting-point u-full-width">
       <option value="yours">your location</option>
       <option value="theirs">their location</option>
       <option value="elsewhere">elsewhere</option>
     </select>
-    <input type="text" name="elsewhere" placeholder="Suggest elsewhere" class="elsewhere-field hide">
+    <input type="text" name="elsewhere" placeholder="Suggest elsewhere" class="elsewhere-field u-full-width hide">
     <input type="hidden" name="reviewer_item_id" value="<%=@reviewer_item.id%>">
-    <button>make offer</button>
+    <div class="make-add-buttons">
+      <button>make offer</button>
+      <form action="/items/new">
+        <button>Add item</button>
+      </form>
+    </div>
   </form>
 
-  <form action="/items/new">
-    <button>Add item</button>
-  </form>
 </section>
 
 <script>
@@ -62,7 +66,6 @@ var selectFromYourItems = event => {
 }
 
 var setMeetingPoint = event => {
-  console.log(event.target)
   if (event.target.value == 'elsewhere') {
     elsewhereField.classList.remove('hide')
   }
