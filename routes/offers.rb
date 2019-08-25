@@ -64,7 +64,7 @@ end
 
 delete '/offers/:id' do
   Offer.delete(params[:id])
-  redirect "/offers/#{params[:id]}"
+  redirect "/offers"
 end
 
 post '/offers/new' do
@@ -109,12 +109,9 @@ put '/offers/:id/update' do
       reviewer_item.quantity = rev_total
       proposer_item.save
       reviewer_item.save
-    elsif params[:status] == 'declined'
-      offer.status_id = 2
-      Offer.delete(offer.id)
+      offer.save
+      redirect '/offers'
     end
-    offer.save
-    redirect '/offers'
   else
     @offers = Offer.all
     @proposer_offers = Offer.where( {proposer_user_id: current_user.id, status_id: 1})
