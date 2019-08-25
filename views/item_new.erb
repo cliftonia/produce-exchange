@@ -4,21 +4,25 @@
     <p><%= message %></p>
   <% end %>
 
-<div class="i-uploader">
+<div class="info-box">
   <form action="/items" method="post" enctype="multipart/form-data">
-    <input class="choose-file" type="file" name="image_link" />
+    <input class="choose-file" type="file" name="image_link" placeholder="upload" />
+    
     <div class="new-title">
       <label for="">Title?</label>
-      <input class="title-input" type="text" name="title">
+      <input class="u-full-width" type="text" name="title">
     </div>
+    
     <div class="new-description">
       <label for="">Description</label>
-      <input class="description-input" type="text" name="description">
+      <input class="u-full-width" type="text" name="description">
     </div>
+    
     <div class="new-qty">
       <label for="">Qty</label>
       <input class="qty-input" type="text" name="quantity">
     </div>
+    
     <select name="unit" id="">
         <option value="none" selected disabled hidden> 
             Select a Unit 
@@ -29,8 +33,11 @@
         <option value="ml">ml</option>
         <option value="pcs">pcs</option>
       </select>
+
+</div>
+   
     <div class="new-button">
       <button class="btn btn-success">Post</button>
     </div>
+
   </form>
-</div>
