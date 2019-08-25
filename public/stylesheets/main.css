@@ -239,6 +239,17 @@ p {
 
 .offer-card {
   background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.offer-card img {
+  width: 70%;
+  margin: 2rem auto;
+}
+
+.edit-offer {
+  margin: 0 auto;
 }
 
 .statement {

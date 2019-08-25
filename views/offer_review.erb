@@ -13,13 +13,13 @@
   <% @proposer_offers.each do |offer| %>
   <a href="/offer/<%=offer.id%>">
     <div class="offer-card card">
-      <p>You offered <%=offer.reviewer_user.username%> <%=offer.proposer_item.title%> for their <%=offer.reviewer_item.title%></p>
       <img src="<%=offer.reviewer_item.photos.first.image_link%>" alt="">
-  </a>
-  <form action="/offers/<%=offer.id%>/edit" class="edit-offer">
-    <button>EDIT OFFER</button>
-  </form>
+      <p>You offered <%=offer.reviewer_user.username%> <%=offer.proposer_item.title%> for their <%=offer.reviewer_item.title%></p>
+      <form action="/offers/<%=offer.id%>/edit" class="edit-offer">
+        <button>EDIT OFFER</button>
+      </form>
     </div>
+  </a>
   <% end %>
 </section>
 
@@ -27,8 +27,8 @@
   <% @reviewer_offers.each do |offer| %>
     <a href="/offer/<%=offer.id%>">
       <div class="offer-card card">
-        <p><%=offer.proposer_user.username%> offers <%=offer.proposer_item.title%> for your <%=offer.reviewer_item.title%></p>
         <img src="<%=offer.proposer_item.photos.first.image_link%>" alt="">
+        <p><%=offer.proposer_user.username%> offers <%=offer.proposer_item.title%> for your <%=offer.reviewer_item.title%></p>
       </div>
     </a>
   <% end %>
