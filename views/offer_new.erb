@@ -35,7 +35,7 @@
     <button>make offer</button>
   </form>
 
-  <form action="items/new">
+  <form action="/items/new">
     <button>Add item</button>
   </form>
 </section>
@@ -49,6 +49,7 @@ var selectMeetingPoint = document.querySelector('.meeting-point')
 var elsewhereField = document.querySelector('.elsewhere-field')
 
 var selectFromYourItems = event => {
+
   var options = {
     url: '/api/items',
     data: { item_id: event.target.value }

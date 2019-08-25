@@ -1,9 +1,9 @@
 <h1>EDIT OFFER</h1>
 <form action="/offers/<%=@offer.id%>" method="post">
   <input type="hidden" name="_method" value="put">
-  <input type="text" name="title" placeholder="<%=@offer.proposer_item.title%>">
-  <input type="text" name="quantity" placeholder="<%=@offer.proposer_item_qty%>">
-  <input type="text" name="unit" placeholder="<%=@offer.proposer_item.unit%>">
+  <input class="u-full-width" type="text" name="title" placeholder="<%=@offer.proposer_item.title%>">
+  <input class="u-full-width" type="text" name="quantity" placeholder="<%=@offer.proposer_item_qty%>">
+  <input class="u-full-width" type="text" name="unit" placeholder="<%=@offer.proposer_item.unit%>">
   <button>UPDATE</button>
 </form>
 
@@ -11,6 +11,3 @@
   <input type="hidden" name='_method' value='delete'>
   <button>DELETE</button>
 </form>
-
-<%# edit only lets you edit the item and quanity of you item you the proposer want to offer %>
-<%# why is the reviewer qty not saved %>
