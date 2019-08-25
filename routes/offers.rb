@@ -27,7 +27,7 @@ end
 get '/offers' do
   @offers = Offer.all
   @proposer_offers = Offer.where( {proposer_user_id: current_user.id, status_id: 1})
-  @reviewer_offers = Offer.where( {proposer_user_id: current_user.id, status_id: 1})
+  @reviewer_offers = Offer.where( {reviewer_user_id: current_user.id, status_id: 1})
   erb :offer_review
 end
 
@@ -58,7 +58,7 @@ put '/offers/:id' do
   if edit.save
     redirect "/offers"
   else
-    binding.pry
+    # binding.pry
   end
 end
 
@@ -92,8 +92,6 @@ end
 get '/offer/:id' do
   @offer = Offer.find(params[:id])
   @status = OfferStatus.find(@offer.status_id).stage
-  proposed_user_id = @offer.proposer_item.user_id
-  @photos = Photo.where(item_id: @offer.proposer_item.id)
   erb :offer_confirm
 end
 
@@ -118,6 +116,9 @@ put '/offers/:id/update' do
     offer.save
     redirect '/offers'
   else
+    @offers = Offer.all
+    @proposer_offers = Offer.where( {proposer_user_id: current_user.id, status_id: 1})
+    @reviewer_offers = Offer.where( {reviewer_user_id: current_user.id, status_id: 1})
     @error_messages = "You don't have enough in your inventory"
     erb :offer_review
   end
