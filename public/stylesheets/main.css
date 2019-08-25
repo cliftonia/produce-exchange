@@ -94,6 +94,11 @@ p {
   margin-bottom: 0;
 }
 
+/* Cliftons CSS Begin */
+
+/* Item_show Page */
+/* Here is where i converted my edit hyperlink into a button */
+
 .edit-btn {
   display: inline-block;
   height: 38px;
@@ -287,12 +292,6 @@ p {
   display: flex;
   justify-content: space-evenly;
 }
-/* Cliftons CSS End  */
-
-
-
-
-
 
 /* Ashley's CSS Begin */
 
