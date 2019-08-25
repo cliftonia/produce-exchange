@@ -14,18 +14,18 @@
 </div>
 
 
-<div class="i-uploader">
+<div class="info-box">
   <form action="/items/<%= @item.id %>" method="post" enctype="multipart/form-data">
   <input type="hidden" name="_method" value="put">
     
     <div class="new-title">
       <label for="">Title?</label>
-      <input class="title-input" type="text" name="title" value="<%= @item.title%>">
+      <input class="u-full-width" type="text" name="title" value="<%= @item.title%>">
     </div>
 
     <div class="new-description">
       <label for="">Description</label>
-      <input class="description-input" type="text" name="description" value="<%= @item.description%>">
+      <input class="u-full-width" type="text" name="description" value="<%= @item.description%>">
     </div>
 
     <div class="new-qty">
@@ -47,12 +47,12 @@
       </select>
     </div>
 
+</div>
     <div class="new-button">
       <button class="btn btn-success">Update</button>
     </div>
 
   </form>
-</div>
 
 <%# <script>
 

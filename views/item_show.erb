@@ -8,31 +8,40 @@
 
 </div>
 
-<h1> <%= @item.title %> </h1>
+<div class="info-box">
 
-<h4>Description</h4>
-<p> <%= @item.description %> </p>
-<h3>posted by: <%= @item.user.username %></h3>
+  <h1 class="itm-shw-heading"><%= @item.title %> </h1>
 
-<h2>Quantity</h2>
-<p> <%= @item.quantity%> <%= @item.unit%> </p>
+  <h4>Description:</h4>
+  <p> <%= @item.description %> </p>
 
-<% if logged_in? && current_user.id == @item.user_id%>
+  <h4>Quantity:</h4>
+  <p> <%= @item.quantity%> <%= @item.unit%> </p>
+  <h5>Listed By: <%= @item.user.username %></h5>
 
-  <form action="/items/<%= @item.id %>" method="post">
-    <input type="hidden" name="_method" value="delete">
-    <button>delete</button>
-  </form>
+</div>
 
-  <a href="/items/<%= @item.id %>/edit">Edit Item</a>
+<div class="itm-show-but-container">
 
-<% end %>
+  <% if logged_in? && current_user.id == @item.user_id%>
 
-<% if logged_in? && current_user.id != @item.user_id %>
+    <form class="delete-form" action="/items/<%= @item.id %>" method="post">
+      <input type="hidden" name="_method" value="delete">
+      <button>delete</button>
+    </form>
 
-  <form action="/offers/<%= @item.id%>">
-    <button>make offer</button>
-  </form>
+    <a class ="edit-btn" href="/items/<%= @item.id %>/edit">Edit Produce</a>
 
-<% end %>
+  <% end %>
+
+  <% if logged_in? && current_user.id != @item.user_id %>
+
+    <form action="/offers/<%= @item.id%>">
+      <button>make offer</button>
+    </form>
+
+  <% end %>
+
+</div>
+
 
